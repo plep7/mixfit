@@ -50,7 +50,7 @@ Hear a track and set its beat grid, hot cues, memory cues and phrases by ear.
 <td valign="top">
 
 **[Automix](manual/automix.md)**<br>
-Just listen to your library and see if the robots do anything sick, previews each transition, plays it live with each track's vocals, drums and bass in your hands, or renders it to one file.
+Just listen to your library and see if the robots do anything sick, previews each transition, plays it live with each track's vocals, drums and bass in your hands.
 
 [![A set with its set flow and a transition preview](images/automix.png)](manual/automix.md)
 
