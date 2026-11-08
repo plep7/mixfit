@@ -1,4 +1,4 @@
-# Pat In Key
+# Mixfit
 
 **Key, BPM, beat grids, cues and tidy names for your DJ tracks, on macOS and Windows.**
 Drop a folder of music on the window, check what it found, and press Apply.
