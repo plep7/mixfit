@@ -2,7 +2,7 @@
 
 You can open Settings from the top of the sidebar, from the Edit menu (the app menu on a Mac), or with Ctrl or Cmd + comma.
 Changes take effect right here, right now.
-Pat In Key keeps them in `settings.json` in the [app data folder](#where-your-data-lives).
+Mixfit keeps them in `settings.json` in the [app data folder](#where-your-data-lives).
 
 ![Settings: key format, BPM range, background, audio output, file names, what Apply does, the rekordbox collection, watch folders and stems](../images/settings.png)
 
@@ -54,7 +54,7 @@ That covers the list, the [track editor](editor.md#track-editor), [Preview trans
 
 - **Same as system** (the default) follows your computer, and the line under it names the device.
   If you connect AirPods or headphones mid-track, the sound fades over in under a second and carries on where it was.
-  If a Bluetooth device flickers while it connects, Pat In Key waits for it to settle, so the sound only moves once.
+  If a Bluetooth device flickers while it connects, Mixfit waits for it to settle, so the sound only moves once.
 - **Pick a device by name** to always play there.
   While that device is unplugged, it stays in the list marked (not connected), and sound plays on the system's output.
   Settings and the status line both tell you about it.
@@ -63,9 +63,9 @@ If there's no output at all, the status line says so, and the playhead keeps run
 
 ## Where your data lives
 
-Pat In Key keeps the library, settings, logs, waveforms, covers and cue file in the app data folder, never in your music folders:
+Mixfit keeps the library, settings, logs, waveforms, covers and cue file in the app data folder, never in your music folders:
 
-- macOS: `~/Library/Application Support/Pat In Key/`
-- Windows: `%APPDATA%\Pat In Key\`
+- macOS: `~/Library/Application Support/Mixfit/`
+- Windows: `%APPDATA%\Mixfit\`
 
 [Backup and restore](library.md#backup-and-restore) saves all of it in one zip.

@@ -8,7 +8,7 @@ Undo takes all of it back.
 
 ## What Apply writes
 
-Pat In Key reads MP3, WAV, AIFF, FLAC, M4A/AAC, OGG/Opus and WMA files.
+Mixfit reads MP3, WAV, AIFF, FLAC, M4A/AAC, OGG/Opus and WMA files.
 It writes the key, BPM, artist and title where rekordbox, Serato, Traktor and Mixxx look for them.
 In tags and file names, the BPM is a whole number.
 Only the beat grid in the rekordbox XML keeps the decimals ([Cue points](editor.md#cue-points)).
@@ -60,7 +60,7 @@ To read the full message, hover over the badge or select the row.
 
 The summary counts these files, like `2 not written: 1 read-only, 1 in use`.
 The command line prints the reason for each file.
-Pat In Key won't clear a read-only flag or change permissions for you.
+Mixfit won't clear a read-only flag or change permissions for you.
 Fix the file yourself, then Apply again.
 
 ## Renaming and your DJ library
@@ -75,8 +75,8 @@ To make one, choose File > Export Collection in xml format in rekordbox.
 Then pick that file with **Choose XML...** under *rekordbox collection* in [Settings](settings.md), or pass `--rekordbox-xml export.xml`.
 The tracks in that collection keep their names under any format, and they still get their tags.
 Their rows read `(keeps its name: in your rekordbox collection)`.
-Pat In Key only reads the XML, and it never touches rekordbox's database.
-Pat In Key reads the export again each time it starts, so export again after you add tracks to rekordbox.
+Mixfit only reads the XML, and it never touches rekordbox's database.
+Mixfit reads the export again each time it starts, so export again after you add tracks to rekordbox.
 **Forget** stops using the export.
 
 ## File name and title formats
@@ -98,7 +98,7 @@ An example shows under the box, and the New file name column updates as you type
 
 If a track has no artist or energy, the name just drops that token and its punctuation (`8A - 124 - Title.mp3`).
 Your own text around `{energy}` stays, though.
-Pat In Key replaces any characters in an artist or title that Windows or exFAT refuse.
+Mixfit replaces any characters in an artist or title that Windows or exFAT refuse.
 
 **What a format needs.**
 A format has to have `{title}`, and a space or dash between tokens.
@@ -138,7 +138,7 @@ They were checked on rekordbox 7.2.19 for macOS, but not yet on Windows.
 
 1. In rekordbox, leave **KEY** unticked under Preferences > Analysis > Track Analysis Setting, which is rekordbox's default.
    Leave it unticked in any Analysis Setting box that opens when you import, too.
-2. Run Apply in Pat In Key with **Write tags** ticked.
+2. Run Apply in Mixfit with **Write tags** ticked.
 3. Import new tracks.
    For tracks already in rekordbox, select them, right-click and choose **Reload Tags** (**Reload Tag** for one track).
 
@@ -151,11 +151,11 @@ If rekordbox's own key analysis runs, its key (such as `Am`) replaces ours in th
 The Comments column keeps ours, and **Reload Tags** puts ours back in the Key column.
 rekordbox ignores the BPM tag.
 Its BPM column reads 0.00 until its own BPM / Grid analysis runs, which it does by default.
-An M4A tagged by an older Pat In Key shows no key.
+An M4A tagged by an older Mixfit shows no key.
 To fix that, Apply it again, then choose **Reload Tags**.
 
 **WAV files.**
-rekordbox doesn't read a key from a WAV at all, but Pat In Key still writes one for other DJ apps.
+rekordbox doesn't read a key from a WAV at all, but Mixfit still writes one for other DJ apps.
 You have two ways to get a key into rekordbox for a WAV.
 You can convert it to AIFF before tagging.
 Or you can select the WAVs, choose **Analyze Tracks** and tick **KEY** to get rekordbox's own key, which **Reload Tags** then leaves in place.
@@ -163,11 +163,11 @@ Ticking **KEY** there also ticks it in Preferences, so untick it again afterward
 
 ## Cover art
 
-Pat In Key shows the art that's already in each file.
+Mixfit shows the art that's already in each file.
 When a file has several pictures, it shows the front cover.
-For a track with no art, Pat In Key looks one up on [MusicBrainz](https://musicbrainz.org) and the [Cover Art Archive](https://coverartarchive.org).
+For a track with no art, Mixfit looks one up on [MusicBrainz](https://musicbrainz.org) and the [Cover Art Archive](https://coverartarchive.org).
 It sends only the artist, title and album, and you don't need an account.
-Pat In Key only takes a sure match:
+Mixfit only takes a sure match:
 
 - The artist and title are the same, and a remix only matches that remix.
 - The cover comes from the artist's own earliest release, not a compilation or DJ mix.
@@ -189,9 +189,9 @@ A track with no match gets tried again after 30 days.
 **Offline or slow.**
 When you're offline, lookups just stop for that batch with no error.
 The status line says `Cover art lookup skipped: no connection.`
-If a track takes too long, Pat In Key skips it for now and tries again next time.
+If a track takes too long, Mixfit skips it for now and tries again next time.
 The status line then says `Some covers took too long and were skipped.`
-If a service is too slow for 3 tracks in a row, Pat In Key stops using it for the rest of the batch.
+If a service is too slow for 3 tracks in a row, Mixfit stops using it for the rest of the batch.
 
 To turn lookups off and leave found covers out, untick *Add missing cover art* under *On Apply*.
 On the command line, lookups run with `--write-tags`, and `--no-art-lookup` turns them off.
@@ -218,7 +218,7 @@ With the option off, Apply and Undo leave ReplayGain tags alone.
 
 ## Undo
 
-Pat In Key logs every Apply and every [Smart Fix](library.md#smart-fixes) to a `changes-<time>.csv` file.
+Mixfit logs every Apply and every [Smart Fix](library.md#smart-fixes) to a `changes-<time>.csv` file.
 **Undo last Apply** puts back the latest batch's names, tags, cleared descriptions, covers and rekordbox cues, and that includes renamed files.
 On the command line, `python -m app.cli --undo changes-<time>.csv` does the same for that log.
 The window keeps its logs in the [app data folder](settings.md#where-your-data-lives).

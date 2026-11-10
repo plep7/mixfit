@@ -1,12 +1,12 @@
-# Pat In Key manual
+# Mixfit manual
 
-Pat In Key analyses your tracks for key, BPM, beat grid, energy, loudness, vocals and phrases.
+Mixfit analyses your tracks for key, BPM, beat grid, energy, loudness, vocals and phrases.
 It tags and renames your tracks, and it keeps them in a library with playlists.
 It also gets your tracks onto players and into other DJ apps.
 Each page below covers one part of the app.
 Most pages start with a picture, so you know where you are.
 
-![Pat In Key's window, with the library on the left and analysed tracks in the table](../images/window.png)
+![Mixfit's window, with the library on the left and analysed tracks in the table](../images/window.png)
 
 | Page | What's in it |
 | --- | --- |
@@ -24,7 +24,7 @@ Most pages start with a picture, so you know where you are.
 
 ## Licence
 
-Pat In Key is licensed under AGPL-3.0, because Essentia/essentia.js requires it.
+Mixfit is licensed under AGPL-3.0, because Essentia/essentia.js requires it.
 
 The packaged app also bundles these programs and libraries:
 
@@ -43,10 +43,13 @@ The stems model's graph is the network of HTDemucs from [Demucs](https://github.
 `app/analysis/models/export_stems.py` makes that graph, with none of the model's weights in it.
 ONNX Runtime (MIT) runs the graph.
 The weights are downloaded only if you turn stems on.
-The author calls the weights' licence "not clear" (see [Stems](automix.md#stems)).
+Their author says "The model weights are not covered by the MIT license, and are provided only for scientific purposes" ([the statement](https://github.com/facebookresearch/demucs/issues/327), see [Stems](automix.md#stems)).
 
 The vocal model also gives Track Suggestion's Collection Radar what it hears.
 `app/analysis/models/export_vocals.py` cuts this model down from `frame_mn06` of [PretrainedSED](https://github.com/fschmid56/PretrainedSED) (MIT, `licenses/PretrainedSED-MIT.txt`).
+
+The beat model, the second opinion on the beat grid, is the small model of [Beat This!](https://github.com/CPJKU/beat_this) (MIT for its code and weights, `licenses/BeatThis-MIT.txt`).
+`app/analysis/models/export_beats.py` exports it whole.
 
 The waveform rules in `worker.js` come from [baken](https://github.com/M-Igashi/baken) too (MIT, `licenses/baken-MIT.txt`).
 

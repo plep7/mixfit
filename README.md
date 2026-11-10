@@ -3,7 +3,7 @@
 **Key, BPM, beat grids, cues and tidy names for your DJ tracks, on macOS and Windows.**
 Drop a folder of music on the window, check what it found, and press Apply.
 
-![Pat In Key with six analysed tracks: key, BPM, energy, loudness, waveform with cues, and the name each file will get](images/window.png)
+![Mixfit with six analysed tracks: key, BPM, energy, loudness, waveform with cues, and the name each file will get](images/window.png)
 
 ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-blue) ![license](https://img.shields.io/badge/license-AGPL--3.0-green)
 
@@ -51,7 +51,6 @@ Hear a track and set its beat grid, hot cues, memory cues and phrases by ear.
 
 **[Automix](manual/automix.md)**<br>
 Just listen to your library and see if the robots do anything sick, previews each transition, plays it live with each track's vocals, drums and bass in your hands.
-
 [![A set with its set flow and a transition preview](images/automix.png)](manual/automix.md)
 
 </td>
@@ -71,12 +70,12 @@ Your music stays on your computer: only artist, title and album leave it, for co
 
 ## Install
 
-Download the app from the [latest release](https://github.com/plep7/dj-key-tool/releases/latest) and unzip it.
+Download the app from the [latest release](https://github.com/plep7/mixfit/releases/latest) and unzip it.
 
 | Computer | Download | Needs |
 | --- | --- | --- |
-| Mac | [`Pat-In-Key-mac.zip`](https://github.com/plep7/dj-key-tool/releases/latest/download/Pat-In-Key-mac.zip) | Apple silicon, macOS 14.4 or later |
-| Windows | [`Pat-In-Key-win64.zip`](https://github.com/plep7/dj-key-tool/releases/latest/download/Pat-In-Key-win64.zip) | 64-bit Windows 10 or 11 |
+| Mac | [`Mixfit-mac.zip`](https://github.com/plep7/mixfit/releases/latest/download/Mixfit-mac.zip) | Apple silicon, macOS 14.4 or later |
+| Windows | [`Mixfit-win64.zip`](https://github.com/plep7/mixfit/releases/latest/download/Mixfit-win64.zip) | 64-bit Windows 10 or 11 |
 
 Everything it uses is bundled.
 It is not code-signed, so Windows SmartScreen asks once (*More info*, then *Run anyway*).
@@ -103,3 +102,6 @@ After that it [updates itself](manual/updates.md).
 
 AGPL-3.0, as Essentia requires.
 The app bundles other open-source parts under their own licences, listed in [the manual](manual/README.md#licence).
+The stems model's weights are a download, not part of the app.
+The Demucs author says they "are not covered by the MIT license, and are provided only for scientific purposes" ([the statement](https://github.com/facebookresearch/demucs/issues/327)).
+The Demucs README adds that "the license of the weights is not clear."

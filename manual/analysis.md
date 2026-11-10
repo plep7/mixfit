@@ -1,8 +1,8 @@
 # Analysis
 
-Pat In Key measures each track's key, BPM, beat grid, energy, loudness, vocals and sections.
+Mixfit measures each track's key, BPM, beat grid, energy, loudness, vocals and sections.
 It also tells you when it isn't sure.
-When you press Apply, Pat In Key writes all this into your files.
+When you press Apply, Mixfit writes all this into your files.
 [Tags, names and Apply](tags.md) shows what goes where.
 
 ![The table after analysis, with each track's key, BPM, energy, loudness, waveform, cues and checks](../images/analysis.png)
@@ -13,21 +13,21 @@ When you press Apply, Pat In Key writes all this into your files.
 | --- | --- |
 | **Key** | Camelot (8A) or musical (Am). It's read with a profile made for dance music, and a second reading cross-checks it. With [stems](#sharpened-by-stems), it's read from the bass and other sounds alone. |
 | **BPM** | Worked out from the beat spacing over the whole track. Half and double time are corrected (87.5 → 175, 62 → 124). Then it's rounded to a whole BPM, with a half rounding up. |
-| **Beat grid and bars** | An even grid on the kick. Bars start where the kick comes back after a break, where sections change and where the chords turn. With [stems](#sharpened-by-stems), where a bar starts is read from the drums alone. |
-| **Energy** | A level from 1 to 10, as Pat In Key's own estimate. See [Energy level](#energy-level). |
-| **Loudness** | LUFS and true peak, which Pat In Key only measures. See [Loudness](#loudness). |
+| **Beat grid and bars** | An even grid on the kick. Bars start where the kick comes back after a break, where sections change and where the chords turn. A learned beat tracker gives a second opinion on the beat and the bar, which settles `bars?` where the two agree. With [stems](#sharpened-by-stems), where a bar starts is read from the drums alone. |
+| **Energy** | A level from 1 to 10, as Mixfit's own estimate. See [Energy level](#energy-level). |
+| **Loudness** | LUFS and true peak, which Mixfit only measures. See [Loudness](#loudness). |
 | **Vocals** | About how much of the track has a voice, and where. It's a hint. With [stems](#sharpened-by-stems), it comes from the vocal's own level. See [Vocals](#vocals). |
 | **Sections** | Intro, Verse, Build, Drop, Chorus, Groove, Break, Bridge and Outro. See [Phrases](#phrases). |
 | **Names** | Artist and title, taken from the tags or from a file name read as `Artist - Title`. |
 
 - The key is read at the track's own tuning, so a record pressed a little sharp still reads in its key.
-  If the tuning is unclear, Pat In Key falls back to A = 440 Hz.
+  If the tuning is unclear, Mixfit falls back to A = 440 Hz.
   The tuning step is tested on generated tracks, but not yet on real music a person checked.
 - The BPM range in [Settings](settings.md) decides where half-time and double-time readings fold to.
 - Sometimes the sound can't tell which half of a beat the kick is on, or which beat starts a bar.
   Then you get `bars?` instead of a guess.
   To see how a grid that moves gets written, read [The beat grid in the XML](editor.md#the-beat-grid-in-the-xml).
-- Before Pat In Key reads a file name, it strips out track numbers, underscores and download clutter (`[Free Download]`, `www.site.com`, `320kbps`).
+- Before Mixfit reads a file name, it strips out track numbers, underscores and download clutter (`[Free Download]`, `www.site.com`, `320kbps`).
 
 **Results are remembered** between sessions, both in the window and in the command line's `--csv` file.
 
@@ -35,7 +35,7 @@ When you press Apply, Pat In Key writes all this into your files.
   The other files show `remembered` in the Check column.
 - Results follow a track when you rename it in the window, and when you undo that rename.
   Remembered tracks still re-fold when you change the BPM range.
-- Results live in your library (`~/Library/Application Support/Pat In Key/library.db` on macOS, `%APPDATA%\Pat In Key\library.db` on Windows), never in your music folders.
+- Results live in your library (`~/Library/Application Support/Mixfit/library.db` on macOS, `%APPDATA%\Mixfit\library.db` on Windows), never in your music folders.
   [Library and playlists](library.md) has more about the library.
 - An older version may have remembered a track without its energy, loudness or vocals.
   That track gets analysed once more the first time you add it after updating.
@@ -51,7 +51,8 @@ The Check column flags tracks worth a listen:
 | --- | --- |
 | `key?` | The key is uncertain. |
 | `bpm?` | The tempo is unsteady. |
-| `bars?` | Pat In Key is unsure where the beat or the bar starts. |
+| `bars?` | Mixfit is unsure where the beat or the bar starts. |
+| `grid?` | The grid from your rekordbox collection disagrees with Mixfit's. |
 | `folded` | Half or double time was corrected. |
 | `cleaned` | Another tool's key or energy text was removed from the name ([details](tags.md#key-and-energy-text-from-other-tools)). |
 | `name?` | No artist was found. |
@@ -71,8 +72,17 @@ The `?` beside the Check heading lists every check.
 - **`bars?`** means the kick hits about as hard on the off-beat as on the beat, with no snare or clap on 2 and 4.
   It can also mean that nothing in the sound says which beat starts a bar.
   The tooltip says which of the two it is.
+  Before it shows, a second opinion gets a say from [Beat This!](https://github.com/CPJKU/beat_this), a learned beat and downbeat tracker, which listens to the 15 seconds where the kick and bass are loudest.
+  Where it agrees with Mixfit's own reading on the beat and on bar 1, and the kick and bass hold the grid through the track, the check clears.
+  Where the two disagree, the check stays and the tooltip says what each of them hears.
+  The second opinion never moves a grid on its own.
+  It was checked on generated tracks whose bars are known, and against bar lines marked on the benchmark corpus from spectrograms, not yet by ear.
   Automix echoes out of and into a `bars?` track rather than risk a train-wreck.
   Set the track's grid in the [track editor](editor.md#track-editor) and the check clears.
+- **`grid?`** means the grid your rekordbox collection, or an import, gave the track sits apart from the one Mixfit hears: half a beat off, bar 1 on another beat, or more than 20 ms away.
+  Cues and the rekordbox XML use the imported grid.
+  The tooltip says how far apart the two are.
+  Open the track in the [track editor](editor.md#track-editor) to listen and set the one you trust.
 
 With `--csv`, the `bpm_unsteady` column holds the `bpm?` tooltip text.
 The `tempos` column holds the grid written to the rekordbox XML.
@@ -81,7 +91,7 @@ The `tempos` column holds the grid written to the rekordbox XML.
 
 The Energy column shows how intense a track feels, from 1 (very chill) to 10 (a festival peak).
 It's the same idea you'll know from Mixed In Key.
-But it's Pat In Key's own estimate, not Mixed In Key's number.
+But it's Mixfit's own estimate, not Mixed In Key's number.
 The two will often differ.
 
 The estimate listens to the main body of the track, so an intro or breakdown doesn't drag it down.
@@ -130,8 +140,8 @@ DJ software shows the comment, so you'll see the level there.
 - With the option on, the estimate replaces the existing level.
   Undo brings the old level back.
   A track with no estimate keeps its level.
-- Pat In Key can't tell who wrote a level.
-  So turning the option off also leaves Pat In Key's own earlier estimates alone.
+- Mixfit can't tell who wrote a level.
+  So turning the option off also leaves Mixfit's own earlier estimates alone.
   To take those out, use Undo.
 - A level only counts at the start of a comment or right after a key, written as `Energy 1` to `Energy 10`.
   `Energy 52` is a name, so it stays.
@@ -152,10 +162,10 @@ A mono file reads the same as a stereo file with the same sound on both sides.
 Silence, or a measurement that failed, shows `-`.
 The rest of the analysis still stands.
 For a `partial` track, the loudness covers only the part that was analysed.
-On test tones and 58 real tracks, the loudness came within 0.1 LU and 0.15 dB of a separate meter.
+On test tones and 115 real tracks, the loudness came within 0.1 LU and the true peak within 0.2 dB of a separate meter.
 rekordbox has no LUFS figure to compare with.
 
-**Pat In Key only measures.**
+**Mixfit only measures.**
 No audio is changed, normalized or limited.
 rekordbox's Auto Gain only works on its own decks.
 On a CDJ or XDJ, you set the trim by hand.
@@ -172,9 +182,7 @@ Sort by the Vocals column to find the instrumentals, which show `none`.
 It can miss a voice, or hear one in a lead sound or a sample.
 So trust your ears.
 Nobody has marked the voices by ear yet, so there's nothing to check it against.
-Pat In Key was compared with rekordbox's vocal analysis on 58 tracks.
-It called 13 of 15 vocal tracks vocal, and it called 1 of 15 instrumentals vocal.
-Where the two disagree, rekordbox misses voices too.
+Where Mixfit and rekordbox disagree about a voice, rekordbox misses voices too.
 
 - If the measurement failed, the track shows `-`.
   The rest of its analysis still stands.
@@ -186,7 +194,7 @@ Where the two disagree, rekordbox misses voices too.
 
 A full mix can fool the analysis.
 A vocal pickup or a loud stab can make a bar look like it starts a beat early, drums and vocals blur the notes the key comes from, and a lead synth can sound like a voice.
-Turn on **Sharpen analysis with stems** in [Settings](settings.md#stems), and Pat In Key splits each track into drums, bass, other sounds and vocal, and reads three things again:
+Turn on **Sharpen analysis with stems** in [Settings](settings.md#stems), and Mixfit splits each track into drums, bass, other sounds and vocal, and reads three things again:
 
 - **Bar 1** from the drums alone. The beat grid stays where the full mix puts it.
 - **Key** from the bass and other sounds, with no drums or vocal in the way.
@@ -195,7 +203,7 @@ Turn on **Sharpen analysis with stems** in [Settings](settings.md#stems), and Pa
 - **Vocal parts** from how loud the vocal is on its own, where the voice model also hears a voice in it.
 
 Sometimes a stem doesn't separate cleanly.
-Then Pat In Key keeps the full mix's reading for that part.
+Then Mixfit keeps the full mix's reading for that part.
 The track shows a quiet `stems` in the Check column either way, and its tooltip says what came from the stems and what didn't, and why.
 A track you [locked](editor.md#track-editor) in the editor keeps its grid, cues and phrases.
 
@@ -216,7 +224,7 @@ Files over 20 minutes, which are mixes rather than tracks, are skipped.
 ## Phrases
 
 Each analysis splits a track into sections.
-Like rekordbox, Pat In Key calls them phrases.
+Like rekordbox, Mixfit calls them phrases.
 Phrases show on the editor's strip.
 They name the [cue points](editor.md#cue-points).
 They guide [Automix](automix.md), whose mix points sit on phrase lines.
@@ -244,7 +252,7 @@ rekordbox's XML has no place for phrases, so only a stick gets them.
 - Bars are always counted as the EDM range (89-178) reads them, whatever range you pick.
   So a track that's really under 89 BPM, like most hip-hop, is counted in half bars.
   Under the Hip-hop range, that means a section can start halfway through a bar.
-- Pat In Key's phrases agree with rekordbox's on a little over half of a track's length.
+- Mixfit's phrases agree with rekordbox's on a little over half of a track's length.
   Either one can be wrong.
   The usual differences are whether a stretch is a Build or a main stretch, and where a Break sits.
 - You can cut, retype and clear phrases in the [track editor](editor.md#phrases).
@@ -253,7 +261,7 @@ rekordbox's XML has no place for phrases, so only a stick gets them.
 A track with a Verse or a Bridge goes on in rekordbox's mid mood, which has names for those two.
 Every other track goes on in rekordbox's high mood.
 
-| Pat In Key | High mood | Mid mood |
+| Mixfit | High mood | Mid mood |
 | --- | --- | --- |
 | Intro | Intro | Intro |
 | Verse, Build | Up | Verse |
@@ -288,7 +296,7 @@ Beside it sits a `.measures` file (about 300 KB) with what the analysis took fro
 - The `.measures` file lets an update skip a fresh analysis when the update only changes sections or cues.
 - Keep the `.edit` files, because they hold what you set in the [track editor](editor.md#track-editor).
 
-Each time Pat In Key starts, it clears out the waveforms and measures that no library track uses, such as those of removed tracks or changed audio.
+Each time Mixfit starts, it clears out the waveforms and measures that no library track uses, such as those of removed tracks or changed audio.
 This cleanup runs in the background.
 Anything written in the last day stays, so a running analysis keeps what it made.
 The cleanup never removes an `.edit` file.

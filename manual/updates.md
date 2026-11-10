@@ -36,5 +36,5 @@ So if the table holds tracks you haven't applied, the app asks you first.
 
 ## Where releases come from
 
-Releases come from the public [`plep7/dj-key-tool`](https://github.com/plep7/dj-key-tool) repository.
+Releases come from the public [`plep7/mixfit`](https://github.com/plep7/mixfit) repository.
 The app reads that repository without signing in.
