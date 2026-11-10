@@ -10,7 +10,7 @@ You can also rate and tag them, find tracks that go with them, and back it all u
 
 Your library is one file, `library.db`.
 It lives in the app data folder (`~/Library/Application Support/Mixfit/` or `%APPDATA%\Mixfit\`), never in your music folders.
-The **Library** section of the sidebar shows these lists:
+The sidebar's **Library** and **Playlists** headings hold these lists:
 
 - **This batch** holds the tracks you've added since you opened the window, so Apply can tag new tracks without touching the rest.
 - **Incoming** holds the tracks your [watch folders](#watch-folders-and-incoming) brought in.
@@ -63,7 +63,7 @@ If you quit during Apply or an export, Mixfit asks first, then stops the job cle
 
 | To | Do |
 | --- | --- |
-| Make one | Use **New...** under the library, or the Library menu (Ctrl/Cmd + N makes a playlist). The new one lands inside the folder you picked, or beside the playlist you picked |
+| Make one | Use the sidebar's **+**, or the Library menu (Ctrl/Cmd + N makes a playlist). The new one lands inside the folder you picked, or beside the playlist you picked |
 | Rearrange, rename | Drag to rearrange. Press F2 (Return on a Mac) or right-click to rename |
 | Delete | Press Delete, and confirm. Deleting a folder deletes everything in it, but the tracks stay in your collection |
 | Add tracks | Drag rows or files onto the playlist, or right-click > **Add to playlist** |
@@ -113,7 +113,7 @@ It's up to date every time you look at it.
 
 ![A matchlist's filters](../images/matchlist.png)
 
-- To make one, choose **New matchlist** from **New...** or the Library menu.
+- To make one, choose **New matchlist** from the sidebar's **+** or the Library menu.
   Choose **Match all** or **any**, and press **Add filter** for more filters.
   The line below the filters counts the matching tracks as you type.
   Create (Save when you edit one) waits until every filter makes sense.
@@ -320,7 +320,7 @@ Its tracks show as missing until **Search a folder...** finds them, and their pl
 
 ## Importing from rekordbox, Apple Music, playlist files and a player's history
 
-**Import playlists...** is in the sidebar and the Tracks menu.
+**Import playlists...** is in the sidebar's **+** and the Tracks menu.
 It takes one file or several, and the tree fills in the background.
 
 | Choose | From | What comes |

@@ -9,7 +9,7 @@ Is it terrible? Maybe. Robots built it, and you're human after all.
 
 ## Building a set
 
-Start a set with **New Automix...**, from **New...** or the Library menu.
+Start a set with **New Automix...**, from the sidebar's **+** or the Library menu.
 You can also right-click a playlist and choose **New Automix from this...**.
 Right-click a track for **Start an Automix with this...**, or a selection for **New Automix from the selected...**.
 
