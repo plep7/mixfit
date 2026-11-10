@@ -1,18 +1,4 @@
-<table align="center" border="0" cellpadding="0" cellspacing="0">
-  <tr style="border: none;">
-    <td valign="middle" style="border: none; padding-right: 8px;">
-      <img src="images/icon.png"  width="36" height="36" alt="Icon" />
-    </td>
-    <td valign="middle" style="border: none;">
-      <h1>Mixfit</h1>
-    </td>
-  </tr>
-</table>
-
-**Key, BPM, beat grids, cues and tidy names for your DJ tracks, on macOS and Windows.**
-Drop a folder of music on the window, check what it found, and press Apply.
-
-![Mixfit with six analysed tracks: key, BPM, energy, loudness, waveform with cues, and the name each file will get](images/window.png)
+<img width="1280" height="640" alt="image" src="https://github.com/user-attachments/assets/08677749-bf40-4d34-9bb6-f865f4aa4ab1" />
 
 ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-blue) ![license](https://img.shields.io/badge/license-AGPL--3.0-green)
 
