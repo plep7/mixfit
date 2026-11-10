@@ -1,3 +1,5 @@
+<p align="center"><img src="images/icon.png" width="96" height="96" alt="Mixfit icon"></p>
+
 # Mixfit
 
 **Key, BPM, beat grids, cues and tidy names for your DJ tracks, on macOS and Windows.**
