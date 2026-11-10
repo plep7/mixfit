@@ -7,8 +7,30 @@ This page covers the track table, search, filters, sorting, the player bar, the 
 
 ## Layout
 
-The sidebar holds the ways to add tracks, your favourites and the library.
-**Settings** sits at the top of the sidebar, and you can also open it from the Edit menu (the app menu on a Mac).
+The sidebar holds your favourites and the [library](library.md), and it comes in two forms.
+
+![The full sidebar, with the Library and Playlists headings over the lists](../images/window.png)
+
+The full sidebar lists your favourites, then **Library** (This batch, Incoming and the Collection), then **Playlists**, with Related Tracks and Hot Cue Bank Lists under them.
+The round **+** at its top holds everything that isn't a list: Add files, Add folder, Import playlists, the New playlist, matchlist, Automix and folder, and Write to rekordbox XML.
+**Settings** sits at the foot of the sidebar, and you can also open it from the Edit menu (the app menu on a Mac).
+
+The rail is the sidebar folded down to one column of places, so the table gets the room.
+
+![The rail beside a playlist, with Playlists and Related filled](../images/library.png)
+
+- **Collection** opens every track.
+- **Playlists** opens a menu of the batch, Incoming and your playlists, with a folder as a submenu.
+- **Related** and **Banks** open or close those pages of the panel.
+- **Add** opens the same menu as the full sidebar's **+**.
+- **Settings** sits at the foot.
+
+The places you're in are filled: Collection or Playlists for the table, and Related or Banks while the panel shows them.
+Mixfit starts with the rail.
+The button at the top of either form switches to the other, and so do View > Sidebar and Ctrl or Cmd + Alt (Option) + S.
+Mixfit remembers which one you left open.
+Making a new playlist opens the full sidebar, so you can type its name.
+
 The top right of the window has **Apply**, **Undo last Apply** (the round arrow), **Export to USB...** and [Activity](library.md#activity).
 You'll find Export CSV and Clear the batch in the Tracks menu.
 While the editor is open, Edit > Undo and Redo take back the editor's last change.
@@ -36,7 +58,7 @@ The heading and the sidebar counts roll to their new number when you add tracks 
 
 There's no system title bar.
 To move the window, drag the header or the top of the sidebar.
-On a Mac, the traffic lights sit over the sidebar's corner.
+On a Mac, the traffic lights sit over the sidebar's top corner, above its button.
 Double-clicking there does whatever System Settings > Desktop & Dock says.
 On Windows, the menus share the top row with Minimize, Maximize and Close.
 Double-click the empty part of that row to maximize or restore the window, and right-click it for the window menu.
@@ -206,6 +228,7 @@ A window opens on the first thing you would type in.
 | Ctrl or Cmd + Shift + F | The filter bar |
 | Ctrl or Cmd + I | Track info |
 | Ctrl or Cmd + comma | Settings |
+| Ctrl or Cmd + Alt (Option) + S | The full sidebar or the rail |
 | Ctrl or Cmd + N | New playlist |
 | Ctrl or Cmd + J | Activity |
 | Ctrl or Cmd + Shift + J | [Notifications](#notifications) |

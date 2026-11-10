@@ -1,6 +1,6 @@
 # Settings
 
-You can open Settings from the top of the sidebar, from the Edit menu (the app menu on a Mac), or with Ctrl or Cmd + comma.
+You can open Settings from the foot of the sidebar or its rail, from the Edit menu (the app menu on a Mac), or with Ctrl or Cmd + comma.
 Changes take effect right here, right now.
 Mixfit keeps them in `settings.json` in the [app data folder](#where-your-data-lives).
 
