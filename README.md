@@ -1,6 +1,13 @@
-<p align="center"><img src="images/icon.png" width="96" height="96" alt="Mixfit icon"></p>
-
-# Mixfit
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+  <tr style="border: none;">
+    <td valign="middle" style="border: none; padding-right: 8px;">
+      <img src="images/icon.png"  width="36" height="36" alt="Icon" />
+    </td>
+    <td valign="middle" style="border: none;">
+      <h1>Mixfit</h1>
+    </td>
+  </tr>
+</table>
 
 **Key, BPM, beat grids, cues and tidy names for your DJ tracks, on macOS and Windows.**
 Drop a folder of music on the window, check what it found, and press Apply.
