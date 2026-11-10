@@ -212,9 +212,9 @@ The Waveform column shows where the cues will land before anything is written.
 The cues show as ticks in their colors, and you can hover over the ticks for the times.
 Cues you set in the editor stay.
 A locked track's cues stay too.
-If an update changes how cues are placed, Pat In Key redoes them quickly, with no new decode.
+If an update changes how cues are placed, Mixfit redoes them quickly, with no new decode.
 New section names need one new analysis.
-Cues that Pat In Key already sent to rekordbox count as the track's own.
+Cues that Mixfit already sent to rekordbox count as the track's own.
 To replace them, take them out first with `--remove-cues`.
 
 The controls under the **Make rekordbox cues** tick follow rekordbox's *CUE Analysis* preferences:
@@ -232,7 +232,7 @@ The controls under the **Make rekordbox cues** tick follow rekordbox's *CUE Anal
 The first bar is the first one with sound, past any silence or pickup.
 Bar cues get rekordbox's names: `1.1Bars`, `1.1Bars+8`, `1.1Bars+16`.
 Bar cues count on the grid the track will end up with.
-That's rekordbox's grid if your collection export has it, and Pat In Key's grid if not.
+That's rekordbox's grid if your collection export has it, and Mixfit's grid if not.
 A track with no grid says `no grid` and gets no bar cues, loops or first bar cue.
 A loop that would run off the end is left out.
 So is a memory cue on a spot that already has one.
@@ -268,7 +268,7 @@ Then after each Apply:
 
 1. Open the **rekordbox xml** icon in the browser's left strip.
    Press its refresh button.
-2. Open **All Tracks**, or Playlists > *Pat In Key cues*, and select the tracks.
+2. Open **All Tracks**, or Playlists > *Mixfit cues*, and select the tracks.
 3. Right-click and choose **Import To Collection**.
 4. For a track already in your collection, rekordbox asks `This track already exists in the current collection`.
    Choose **Yes** to load the cues.
@@ -286,7 +286,7 @@ If a track has hot cues, loops or memory cues of its own in your collection expo
 Its row says `keeps its own`.
 The exception is a track you change in the [track editor](#track-editor).
 rekordbox's automatic first-beat memory cue doesn't count as your own, and it stays where it is.
-Pat In Key skips Ogg, Opus, WMA and raw AAC files, because rekordbox can't load them.
+Mixfit skips Ogg, Opus, WMA and raw AAC files, because rekordbox can't load them.
 
 ### The beat grid in the XML
 
@@ -295,8 +295,8 @@ Make that export with *Export BeatGrid information* ticked in rekordbox's Prefer
 Cues then land on the grid that rekordbox already has.
 The track's name, tags and grid go into the XML exactly as rekordbox wrote them, so the import changes nothing else.
 
-Without an export, the XML carries Pat In Key's own grid at the BPM that Pat In Key shows.
-For example, a track heard at 87 BPM that Pat In Key folds up to 174 gets a 174 BPM grid.
+Without an export, the XML carries Mixfit's own grid at the BPM that Mixfit shows.
+For example, a track heard at 87 BPM that Mixfit folds up to 174 gets a 174 BPM grid.
 That grid has twice the beats and the same bar lines.
 The grid's tempo is a whole BPM when the beats fit one, as on most music.
 When they don't, the tempo has two decimals (`174.60`).
@@ -311,7 +311,7 @@ On those tracks the grid can sit half a beat off, so check them by ear.
 
 Undo last Apply puts `rekordbox-cues.xml` back how it was.
 Once rekordbox has imported the cues, take them out with **Cue history...** ([below](#cue-history)) or `--remove-cues`.
-Both pull Pat In Key's cues off lots of tracks at once and keep yours.
+Both pull Mixfit's cues off lots of tracks at once and keep yours.
 rekordbox has no menu item for that.
 Both need a fresh collection export, and both go through the same import.
 If a track is left with no cues, it gets rekordbox's own first-beat memory cue.
@@ -322,15 +322,15 @@ That's because rekordbox ignores an import with no cues.
 **Like my own cues** puts cues where you'd put yours, like rekordbox's personal CUE trend.
 To set it up, press **Learn my cues...** under the cue controls.
 Then pick the tracks to learn from: the whole Collection, or a folder or playlist.
-Pat In Key learns only from cues you set yourself.
+Mixfit learns only from cues you set yourself.
 Those cues can come from the [track editor](#track-editor), an [import](library.md#importing-from-rekordbox-apple-music-playlist-files-and-a-players-history) or your rekordbox collection.
-It never learns from Pat In Key's own cues or from rekordbox's automatic first-beat cue.
+It never learns from Mixfit's own cues or from rekordbox's automatic first-beat cue.
 It needs 5 tracks with your cues.
 With 30 or more tracks across genres, it learns better.
 Learn again after you've cued more tracks.
 **Forget my style** drops what it learnt.
 
-Pat In Key learns each cue as a distance from the track's landmarks, like 16 bars before the first chorus.
+Mixfit learns each cue as a distance from the track's landmarks, like 16 bars before the first chorus.
 Then it places the cue the same way on new tracks.
 A Drop and a Chorus count as one here, so a habit on one carries over to the other.
 A pad only gets a cue if you use that pad on at least half your tracks, and at least a quarter of them agree on where.
@@ -338,14 +338,14 @@ Hot cues keep their pad and your usual name, color and loop.
 Memory cues are learnt up to as many as you usually set.
 Loops stay off your pads.
 
-Learning works best when you hear phrases where Pat In Key finds them.
+Learning works best when you hear phrases where Mixfit finds them.
 If you cue on rekordbox's phrases, it places far fewer cues, and only about half of them land on the beat.
 Check learnt cues in the Waveform column before you Apply.
 
 ### Cue history
 
 rekordbox has no undo for a deleted cue, and its Restore Library swaps out the whole library.
-So Pat In Key keeps a history of your cues.
+So Mixfit keeps a history of your cues.
 Each collection export you choose adds to `cue-history.json` in the app data folder.
 That file keeps up to 20 earlier sets of cues per track, until you delete it.
 The window reads the chosen export every time it starts.
@@ -353,22 +353,22 @@ The history only knows what your exports knew, so export before anything risky.
 
 When a new export has fewer cues on a track than the last one did, the status line and Settings tell you.
 **Cue history...** lists the tracks that lost cues and lets you pick how far back to go.
-It also lists tracks that have Pat In Key's cues, and offers the choice *Without Pat In Key's cues*.
-Pat In Key knows its own cues by exactly what it wrote.
+It also lists tracks that have Mixfit's cues, and offers the choice *Without Mixfit's cues*.
+Mixfit knows its own cues by exactly what it wrote.
 So a track cued before this history existed, or cued by an older version, stays off that list.
-Your cues never get mistaken for Pat In Key's.
+Your cues never get mistaken for Mixfit's.
 Tracks that just lost cues start ticked.
 The rest start unticked, like a track where you deleted a cue on purpose.
 Ticked tracks go into `rekordbox-cues.xml` for the usual import, with the old cues next to today's.
 An old hot cue whose pad is taken comes back as a memory cue.
-Pat In Key follows a track through moves and re-imports by its location, then by artist, title and length.
+Mixfit follows a track through moves and re-imports by its location, then by artist, title and length.
 Once you change a loop in rekordbox, that loop is yours from then on.
 
 On the command line, any run with `--rekordbox-xml` feeds the history and tells you when cues were lost.
 
 - `--restore-cues` puts back what the latest export lost.
 - `--restore-cues all` puts back every track's newest earlier cues.
-- `--remove-cues` takes out Pat In Key's cues.
+- `--remove-cues` takes out Mixfit's cues.
 - `--dry-run` lists the changes first.
 
 These runs are all logged, so `--undo` takes any of them back.

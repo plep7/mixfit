@@ -9,7 +9,7 @@ You can also rate and tag them, find tracks that go with them, and back it all u
 ## The library
 
 Your library is one file, `library.db`.
-It lives in the app data folder (`~/Library/Application Support/Pat In Key/` or `%APPDATA%\Pat In Key\`), never in your music folders.
+It lives in the app data folder (`~/Library/Application Support/Mixfit/` or `%APPDATA%\Mixfit\`), never in your music folders.
 The **Library** section of the sidebar shows these lists:
 
 - **This batch** holds the tracks you've added since you opened the window, so Apply can tag new tracks without touching the rest.
@@ -23,11 +23,11 @@ If a playlist is showing, or you dropped the tracks on one, they go into that pl
 Views open straight away, and the covers turn up after.
 A track whose file changed, or that needs a newer analysis, gets analysed when its view opens.
 Pressing Stop leaves that analysis for later.
-If you drop a folder again, Pat In Key only analyses the files that changed ([Analysis](analysis.md#how-it-works)).
+If you drop a folder again, Mixfit only analyses the files that changed ([Analysis](analysis.md#how-it-works)).
 
-If `library.db` gets damaged, Pat In Key sets it aside as `library.db.damaged-<time>` and starts a fresh one.
+If `library.db` gets damaged, Mixfit sets it aside as `library.db.damaged-<time>` and starts a fresh one.
 The status line tells you when that happens.
-Pat In Key leaves alone a `library.db` that it can't open, or that a newer version wrote.
+Mixfit leaves alone a `library.db` that it can't open, or that a newer version wrote.
 In that case your library only lasts until you close the window.
 To start clean, delete `library.db`.
 That removes your tracks, playlists, ratings and analyses from the library, but no audio file changes.
@@ -57,7 +57,7 @@ Each job has a bar, a count ("6 of 17 tracks") and a **Cancel** button.
 Only one job touches your files at a time.
 Apply, Undo and the library tools wait for an export, scan or search to end.
 New tracks wait for a scan or search to end.
-If you quit during Apply or an export, Pat In Key asks first, then stops the job cleanly.
+If you quit during Apply or an export, Mixfit asks first, then stops the job cleanly.
 
 ## Playlists and folders
 
@@ -97,7 +97,7 @@ The second list reopens on the last list you picked.
 - Drag rows between the two lists.
   They land where you let go, in order.
   If the playlist already holds a track you drag in, the track moves to the new spot.
-  Only playlists take tracks, and an empty playlist keeps its drop card.
+  Only playlists take tracks, and an empty playlist keeps its drop card, which says how to fill it.
 - Cmd/Ctrl + Return adds the selected tracks to the end of the other list.
   Each list's right-click menu has the same command, with the other list's name.
 - The second list can search (Ctrl/Cmd + F) and sort (Shift-click breaks ties).
@@ -116,7 +116,7 @@ It's up to date every time you look at it.
 - To make one, choose **New matchlist** from **New...** or the Library menu.
   Choose **Match all** or **any**, and press **Add filter** for more filters.
   The line below the filters counts the matching tracks as you type.
-  OK waits until every filter makes sense.
+  Create (Save when you edit one) waits until every filter makes sense.
 - Under **Match all**, you can set a link to **or**.
   That groups a filter with the one above it, like Lexicon's OR rules.
   For example, `Genre = House` **or** `Genre = Techno`, then `Rating = 5`, gets you five-star house and techno.
@@ -192,7 +192,7 @@ It stays that way unless you change it.
 **New tag** adds a tag to the category you picked, and a double-click renames a tag.
 **Delete tag** takes the tag off every track, after asking.
 Edits to the tags themselves save straight away, even if you press Cancel.
-Ticks save when you press OK.
+Ticks save when you press Save.
 
 ## Smart Fixes
 
@@ -227,7 +227,7 @@ When Apply or Undo renames a file, the track keeps its playlists, rating and ana
 If you move a file outside the app, the track shows `missing` under its last name, and Apply skips it.
 Add the file's new folder and the track is back in every playlist.
 If the file has the same size and modified time, it needs no new analysis.
-If it was retagged elsewhere, it's analysed once, and from then on Pat In Key knows it by its audio.
+If it was retagged elsewhere, it's analysed once, and from then on Mixfit knows it by its audio.
 A copy of a file, sitting beside the original that's still there, counts as a track of its own.
 
 ## Missing files
@@ -288,14 +288,14 @@ To get a file back, restore it from the Trash and add its folder.
 
 A watch folder brings new tracks in on its own, as in Lexicon.
 To turn it on, tick **Watch for new tracks** in Settings (it's off by default).
-If you haven't chosen a folder, it watches `Music/Pat In Key/Watch Folder` in your home folder.
+If you haven't chosen a folder, it watches `Music/Mixfit/Watch Folder` in your home folder.
 **Add watch folder...** watches another folder, subfolders included.
 **Remove watch folder...** stops watching a folder.
 
 When you drop a new audio file in a watch folder, it joins the library and waits in **Incoming**.
 It gets analysed whatever view is showing.
 A file only comes in once it stops changing, so a copy or download in progress waits.
-Pat In Key skips files already in the library, playlist files, pictures and hidden files.
+Mixfit skips files already in the library, playlist files, pictures and hidden files.
 Anything added while the app was closed comes in at the next launch.
 
 In **Incoming**, **Selected done** clears a track from the list and selects the next one.
@@ -306,14 +306,14 @@ Delete takes a track out of the library, after asking, but the file stays.
 ## Backup and restore
 
 **Library > Back up library...** saves one zip file.
-It holds `library.db`, your settings, the cue history and cue file, the covers Pat In Key found, the waveforms and your editor work.
-Pat In Key reads the backup back before keeping it, so you know it opens.
+It holds `library.db`, your settings, the cue history and cue file, the covers Mixfit found, the waveforms and your editor work.
+Mixfit reads the backup back before keeping it, so you know it opens.
 Your audio files aren't in it, so back those up too.
 The Undo logs stay out of it, since they describe your files as they are now.
 
 **Library > Restore library...** replaces all of that, after asking, and reopens the window on the restored library.
 First it saves your current library as `before-restore-<time>.zip` in the app data folder, so you can go back.
-Pat In Key refuses a damaged backup, a backup from a newer version, or one that isn't Pat In Key's, and nothing changes.
+Mixfit refuses a damaged backup, a backup from a newer version, or one that isn't Mixfit's, and nothing changes.
 No audio file changes, and **Undo last Apply** still works.
 A backup from another Mac or PC restores too.
 Its tracks show as missing until **Search a folder...** finds them, and their playlists, ratings and analyses are kept.
@@ -331,7 +331,7 @@ It takes one file or several, and the tree fills in the background.
 | TXT | rekordbox's File > Export a Playlist in TXT format | One playlist, named after the file, in its order |
 | A USB stick's `PIONEER/rekordbox/export.pdb` | The history a CDJ or XDJ writes to a rekordbox stick as you play | Each set, in the order played |
 
-No audio file changes, and Pat In Key only reads rekordbox's XML.
+No audio file changes, and Mixfit only reads rekordbox's XML.
 Imported tracks get analysed when their view opens, so open a playlist to get its keys and BPMs.
 A track needs that analysis before it can go on a stick or in the XML.
 
@@ -340,7 +340,7 @@ A track needs that analysis before it can go on a stick or in the XML.
 - The track's row says `keeps its own`, and Apply leaves those cues alone.
 - **Export to USB** and **Write to rekordbox XML** carry them, even with no collection chosen.
 - rekordbox's automatic memory cue on the first beat doesn't count.
-  A track with only that cue gets Pat In Key's cues.
+  A track with only that cue gets Mixfit's cues.
 - If you choose a collection that has cues on a track, those cues win, since they're what rekordbox holds now.
 
 **Importing again** is safe, and importing the same file twice changes nothing.
@@ -412,7 +412,7 @@ As in rekordbox, a condition matches all or any of its items:
 | Same comment | Your comment, without the key and energy in front |
 | Rating | At least so many stars |
 | Year | Within so many years |
-| Energy | Within so many levels of Pat In Key's estimate |
+| Energy | Within so many levels of Mixfit's estimate |
 | Added | Came into the library within so many days of it |
 | Played in a set | Within so many tracks of it in a set of your [imported play history](#importing-from-rekordbox-apple-music-playlist-files-and-a-players-history): 1 is right before or after |
 | Mashup | One track's acapella fits the other's instrumental, by the rules of [Mashups](#mashups). rekordbox has no such item |
@@ -427,7 +427,7 @@ For a track in 2A, they are:
 | Those, and a step round the wheel | 2A, 2B, 1A, 3A |
 | Those, and the same step in the other mode | 2A, 2B, 1A, 3A, 1B, 3B |
 
-Pat In Key reads genre, label, year, remixer and composer from the tags the first time a search needs them.
+Mixfit reads genre, label, year, remixer and composer from the tags the first time a search needs them.
 It keeps them until the file changes.
 So the first search on a big collection takes a while, in the background.
 The results leave out tracks not analysed yet, missing files, and copies of the selected track's audio.
@@ -440,7 +440,7 @@ A good match always ranks first, but it only shows when it meets the condition.
 That's why the **Good matches** condition lists them all.
 Taking a track out of the library drops its good matches, with a warning first.
 
-In Pat In Key, rekordbox's Traffic Light is the table's Key column ([Harmonic match](window.md#the-table)).
+In Mixfit, rekordbox's Traffic Light is the table's Key column ([Harmonic match](window.md#the-table)).
 It marks keys against the track playing from the list, or else the selected track, rather than a deck's track.
 
 ### Hot cue banks

@@ -230,8 +230,9 @@ Every stems move sounds the same in the preview, in [Export mix](#export-mix) an
 In Play live, a skip lets it play out like an echo-out.
 
 Turn on **Separate stems for Automix** in [Settings](settings.md).
-The first time, Pat In Key asks before downloading the [HTDemucs](https://github.com/adefossez/demucs) weights (84 MB).
-Their author says "The license of the weights is not clear", since the weights learnt from research-only data.
+The first time, Mixfit asks before downloading the [HTDemucs](https://github.com/adefossez/demucs) weights (84 MB).
+Their author says "The model weights are not covered by the MIT license, and are provided only for scientific purposes" ([the statement](https://github.com/facebookresearch/demucs/issues/327)).
+The Demucs README adds that "the license of the weights is not clear" because the weights learnt from research-only data.
 So the app doesn't ship them.
 
 - Separation runs as **Separate stems** in Activity, at the lowest priority, with Pause and Cancel.
@@ -249,7 +250,7 @@ So the app doesn't ship them.
 Right-click tracks in the table and choose **Export acapella...** or **Export instrumental...** to save either as a file of its own, for edits or a [mashup](library.md#mashups).
 For one track you pick the file, which starts beside the track as `<its name> (Acapella).flac` or `(Instrumental).wav`; for several you pick a folder, and a name already there gets a number rather than being replaced.
 Nothing is ever written over the track itself.
-This works whether or not **Separate stems for Automix** is on; the first time, Pat In Key asks before it downloads the model, as above.
+This works whether or not **Separate stems for Automix** is on; the first time, Mixfit asks before it downloads the model, as above.
 The whole track is separated, in the same **Separate stems** job and ahead of what Vocal over is waiting for, which takes about a minute a track; the status line says where each file went.
 
 The acapella is the separated vocal, for when a voice is better off alone.

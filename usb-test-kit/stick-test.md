@@ -1,4 +1,4 @@
-# Pat In Key stick test (about 15 minutes)
+# Mixfit stick test (about 15 minutes)
 
 Thanks for trying this!
 This stick was made without rekordbox, and we want to know if your player is happy with it.
@@ -28,7 +28,7 @@ People testing similar sticks have needed nothing more than that.
 | Step | Do this | Tell us | Photo |
 | --- | --- | --- | --- |
 | 1 | Turn the player on and plug in the stick | Any message or error code? If there is one, pull the stick and try once more | Yes, if a message appears |
-| 2 | Open the playlist called `Pat In Key test` | Six tracks, in order? | Yes |
+| 2 | Open the playlist called `Mixfit test` | Six tracks, in order? | Yes |
 | 3 | Load track 1 | Do the title, artist, BPM, key and picture look right? | Yes |
 | 4 | Look at the waveform | In colour straight away, or plain first and colour a bit later? | Yes |
 | 5 | Press play and jump to the start, middle and end | Do the beat lines sit on the kick drums? | Yes, one of each |

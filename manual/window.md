@@ -14,10 +14,25 @@ You'll find Export CSV and Clear the batch in the Tracks menu.
 While the editor is open, Edit > Undo and Redo take back the editor's last change.
 Otherwise they take back the last Apply.
 
+## Notifications
+
+What Apply, Undo, Export to USB, a sync and an import did shows as a note in the bottom right corner, above the player.
+After Apply the note has an **Undo** button that puts the batch back at once, with no question.
+A note stays for a few seconds, and waits while the pointer is over it, a button in it has focus, or the window is hidden.
+Three show at once, and the oldest goes when a fourth comes.
+A failure stays until you dismiss it, and the warning box that goes with an Apply failure still opens.
+Press Ctrl or Cmd + Shift + J (or choose View > Notifications) to move focus to the newest note: Tab steps through the others, Space presses the focused button, and Esc dismisses the note and puts focus back where it was.
+A screen reader reads each note as it arrives.
+
 Behind everything, the window shows the selected track's cover, blurred.
 While a track is analysing, it shows that track's cover instead.
 [Background](settings.md#background) changes that.
 Each key shows as a chip in the color Mixed In Key uses for that key.
+
+While a drop is analysing, the card shows the track and a bar.
+Until the first track is in, the bar sweeps and the card counts the seconds so far, so a long first track doesn't look stuck.
+After that it shows the count and the time left.
+The heading and the sidebar counts roll to their new number when you add tracks or change a filter, and they stay still when you ask for less motion.
 
 There's no system title bar.
 To move the window, drag the header or the top of the sidebar.
@@ -26,6 +41,13 @@ Double-clicking there does whatever System Settings > Desktop & Dock says.
 On Windows, the menus share the top row with Minimize, Maximize and Close.
 Double-click the empty part of that row to maximize or restore the window, and right-click it for the window menu.
 Snap layouts, Aero Snap, Win+arrow keys and Alt+Space work as usual.
+
+Buttons answer your pointer with a short change: a soft fill when you hover and, on the larger buttons, a small press when you click.
+Keys never animate: pressing Space or Return on a button just does it.
+The side panel fades in, and the track editor is there the moment you open it.
+Every click does its work at once, and the motion only shows it.
+Every page and panel you open has a way back in plain sight: the back arrow in the editor, the close button on the panel, and Esc.
+If your system asks for less motion (Reduce Motion on a Mac, Animation effects off on Windows), none of this moves and every change just appears, and the spinner on a track being analysed stays still and fades gently in and out instead of turning.
 
 ## The table
 
@@ -51,6 +73,8 @@ Each row shows the cover, key, BPM, energy, loudness, vocals, title and artist, 
 - **Search:** type some words, and the table shows only the tracks that have all of them.
   The search looks in the title, artist, file name, key (in either notation), BPM, genre, label, comment and My Tags.
   Esc clears the search.
+  If no track matches, the table says so and offers **Clear search**, and **Clear filters** when a filter is on.
+  The heading then counts the tracks that show, as `5 of 7 tracks ready`.
 
 ### The filter bar
 
@@ -165,6 +189,9 @@ Sound goes to your [Audio output](settings.md#audio-output).
 
 You can do everything from the keyboard and with a screen reader.
 The screen reader also hears when analysis starts and ends, and what Apply did.
+Tab goes through the window from the sidebar to the player bar, and a box round a list, table or text box shows where you are.
+Tab onto an icon button shows what it does, and Esc hides that.
+A window opens on the first thing you would type in.
 
 | Key | Does |
 | --- | --- |
@@ -181,6 +208,7 @@ The screen reader also hears when analysis starts and ends, and what Apply did.
 | Ctrl or Cmd + comma | Settings |
 | Ctrl or Cmd + N | New playlist |
 | Ctrl or Cmd + J | Activity |
+| Ctrl or Cmd + Shift + J | [Notifications](#notifications) |
 | Ctrl or Cmd + L | Select the track playing (in the Collection if the table doesn't hold it) |
 | Shift + Cmd + R (Shift + Ctrl + R on Windows) | Show the file in Finder or File Explorer |
 | Cmd+K on a Mac, Ctrl+K on Windows, or Ctrl or Cmd + Shift + P | The command palette |

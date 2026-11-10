@@ -19,7 +19,7 @@ In rekordbox, refresh **rekordbox xml**, then right-click a playlist to import i
 - A track in your chosen rekordbox collection keeps its attributes and grid.
   It only takes the fields you set here.
 - If you haven't chosen a collection, a track that's only in a playlist goes in with no cues.
-  That way an import can't overwrite cues that Pat In Key can't see.
+  That way an import can't overwrite cues that Mixfit can't see.
 - Missing tracks and unanalysed tracks stay out, and the status line tells you how many.
 - A `--cues` run on the command line replaces the whole file, playlists included.
   The file stays that way until the window writes it again.
@@ -31,7 +31,7 @@ rekordbox's XML has no My Tag field.
 So rekordbox's My Tag column stays empty, and a player's tag filter won't list these tags.
 The comment in your audio file stays your own.
 Say you take a track's last tag off, and your chosen collection already holds a comment for that track.
-Pat In Key leaves that comment as it is, so clear it in rekordbox yourself.
+Mixfit leaves that comment as it is, so clear it in rekordbox yourself.
 
 ## Sync to Serato, Traktor and Engine
 
@@ -53,12 +53,12 @@ The preview tells you which tracks stay out.
 - **You see it first.** When you pick an app, every change gets listed.
   Nothing is written until you press **Sync**.
 - **Close the app first.** All three apps write their library back when they close.
-  So Pat In Key refuses to sync while the app is open.
-- **Your lists stay yours.** Everything goes in a folder named Pat In Key, and a list you add to that folder yourself stays put.
+  So Mixfit refuses to sync while the app is open.
+- **Your lists stay yours.** Everything goes in a folder named Mixfit, and a list you add to that folder yourself stays put.
   Syncing again only changes the lists that match yours here.
   Deleting a playlist here removes nothing from the app.
 - **Backed up first.** Before a sync, every file it can touch gets copied to `sync-backups` in the app data folder.
-  Pat In Key keeps the backups of the last five syncs for each app.
+  Mixfit keeps the backups of the last five syncs for each app.
 - **A failed or cancelled sync leaves no trace.** The backed-up copies go back in place.
 - **Undo last sync...** in the dialog puts the app's library back the way it was.
   If the app has changed its library since the sync, you're told first, because undoing also loses those changes.
@@ -67,5 +67,5 @@ The preview tells you which tracks stay out.
 - **Music files only change for Serato's cues.** Even then, they change only if the audio comes out the same.
   Undo takes those cue tags off again, unless Serato has changed them since.
 
-Pat In Key hasn't measured cue timing in these apps itself.
+Mixfit hasn't measured cue timing in these apps itself.
 For each app, it follows what other converters found.

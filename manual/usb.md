@@ -35,13 +35,13 @@ So use a spare stick, and run through the [test kit](../usb-test-kit/README.md).
 - Nothing starts ticked, even when only one stick is plugged in.
   You tick the line with the stick's name and size yourself.
 - The dialog only offers removable drives, and it never formats anything.
-- Pat In Key refuses a stick that holds a rekordbox library.
-  It also refuses a stick with any `PIONEER` or `Contents` folder that Pat In Key didn't write.
+- Mixfit refuses a stick that holds a rekordbox library.
+  It also refuses a stick with any `PIONEER` or `Contents` folder that Mixfit didn't write.
   That way the library on the stick stays whole.
-- You can write to a Pat In Key stick again and keep the music on it.
+- You can write to a Mixfit stick again and keep the music on it.
   If rekordbox or a player has changed the stick's library since, you decide whether to erase it.
 - Your music is only copied, never changed.
-- The file `Pat In Key build.txt` on the stick names the build that wrote it, which is handy for a test report.
+- The file `Mixfit build.txt` on the stick names the build that wrote it, which is handy for a test report.
 
 ### What each player plays
 
@@ -84,19 +84,19 @@ If you run from source, fetch baken once with `python -m app.usb.usb_export --fe
 
 Tick **Put My Settings on the stick** to bring your player and mixer setup along.
 The box stays off until you tick it, so by default a player keeps its own settings.
-In **My Settings...** you set each setting under the name rekordbox uses, and Pat In Key remembers your choices.
+In **My Settings...** you set each setting under the name rekordbox uses, and Mixfit remembers your choices.
 The `--my-settings` option does the same from the command line.
 
 - The settings start at rekordbox's defaults, with one exception.
   Hot cue auto load starts at By track, so a track where you [turned it off](editor.md#hot-cue-auto-load) stays off.
-- If you untick the box, the next export removes only the settings files that Pat In Key put on the stick.
+- If you untick the box, the next export removes only the settings files that Mixfit put on the stick.
   It never removes a file that a player saved.
 - No DJ profile (`djprofile.nxs`) goes on the stick.
 - No real player has loaded these settings yet.
 
 ## Cues back from a stick
 
-**Tracks > Read cues back from a stick...** picks up the changes a player made to hot cues and memory cues on a Pat In Key stick.
+**Tracks > Read cues back from a stick...** picks up the changes a player made to hot cues and memory cues on a Mixfit stick.
 It finds cues the player set, moved or deleted.
 Choose the stick's folder, and you'll see each track's changes, like `Hot cue B moved 1:02 to 1:04`.
 Nothing comes in until you press **Take**.
@@ -110,8 +110,8 @@ Nothing comes in until you press **Take**.
 - A moved cue keeps your name and color.
   A new cue gets the player's color.
 
-Reading cues back only works on sticks written by this version of Pat In Key or a later one.
+Reading cues back only works on sticks written by this version of Mixfit or a later one.
 It never works on a stick that rekordbox wrote.
 This feature is new, and nobody has yet read back a stick that a real player changed.
-If Pat In Key finds no changes, it tells you.
+If Mixfit finds no changes, it tells you.
 A player's play history comes in through [Import playlists...](library.md#importing-from-rekordbox-apple-music-playlist-files-and-a-players-history).
