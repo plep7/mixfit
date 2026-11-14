@@ -1,0 +1,274 @@
+# Builds and looks at the Windows app from a ref of the private source repository, on GitHub's hosted Windows runner,
+# and publishes nothing: no tag, no release, nothing in this repository changes.
+#
+# This repository is public, so its run logs are too, and the source being built is not. Every step that touches the
+# source sends all of its output, standard output and standard error, to files under RUNNER_TEMP\private, which nothing
+# uploads, and prints one fixed line of its own, so no test name, file path, traceback or pip line reaches the log. The
+# source is read with a deploy key that can only read plep7/mixfit-app (the secret MIXFIT_APP_DEPLOY_KEY), and the
+# workflow runs only when it is started by hand from main, so no fork or pull request can reach that secret.
+# Only the built app's zip and the window captures are uploaded, for one day each.
+#
+#   gh workflow run windows-check.yml --repo plep7/mixfit -f ref=<branch, tag or commit of plep7/mixfit-app>
+#
+# The lines it prints are exactly these, and nothing else of its own: "guard: ready", "source: fetched" or
+# "source: failed", "ffmpeg: ready" or "ffmpeg: failed", "dependencies: ready" or "dependencies: failed",
+# "tests: passed" or "tests: failed" (the run goes on after a failed suite, and its last step fails), "build: passed" or
+# "build: failed", "app folder: passed" or "app folder: failed", "selftest: passed" or "selftest: failed",
+# "unpack: passed" or "unpack: failed", "window check: passed" or "window check: failed (<code>)", where the code is one
+# of the fixed words tools/window_check.py gives a failure (such as "1-long-tooltip:no-shadow") and holds nothing from
+# the app, and "result: passed" or "result: failed". GitHub adds its own set-up and upload lines, and "Process completed
+# with exit code 1" when a step stops.
+name: Windows check
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "The branch, tag or commit of plep7/mixfit-app to build and look at"
+        required: true
+        type: string
+      tests:
+        description: "Run the whole test suite (15 to 42 minutes)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+env:
+  FFMPEG_VERSION: "7.1.1"
+  FFMPEG_SHA256: "04861d3339c5ebe38b56c19a15cf2c0cc97f5de4fa8910e4d47e5e6404e4a2d4"
+
+jobs:
+  check:
+    runs-on: windows-latest
+    timeout-minutes: 120
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          architecture: x64
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          architecture: x64
+
+      # Writes the helper that every later step runs its work through: it sends all output to a file in the private
+      # folder and prints only the fixed line it is given.
+      - name: Prepare
+        run: |
+          $ErrorActionPreference = "Stop"
+          if ($PSVersionTable.PSVersion -lt [version]"7.4") { "guard: failed"; exit 1 }
+          $private = Join-Path $env:RUNNER_TEMP "private"
+          New-Item -ItemType Directory -Force $private | Out-Null
+          New-Item -ItemType Directory -Force (Join-Path $env:RUNNER_TEMP "public-out/app") | Out-Null
+          New-Item -ItemType Directory -Force (Join-Path $env:RUNNER_TEMP "public-out/captures") | Out-Null
+          @'
+          $ErrorActionPreference = "Stop"
+          $ProgressPreference = "SilentlyContinue"
+          $PSNativeCommandUseErrorActionPreference = $true
+          $private = Join-Path $env:RUNNER_TEMP "private"
+          $src = Join-Path $env:RUNNER_TEMP "src"
+          $out = Join-Path $env:RUNNER_TEMP "public-out"
+          # Runs $Body with every stream going to the file named for the step, prints $Pass or $Fail, and stops the step
+          # on a failure unless -Continue is given. -> whether it passed.
+          function Guard {
+              param([string]$Name, [string]$Pass, [string]$Fail, [scriptblock]$Body, [switch]$Continue)
+              $log = Join-Path $private "$Name.log"
+              try {
+                  & $Body *>> $log
+              } catch {
+                  ($_ | Out-String) | Out-File -FilePath $log -Append
+                  Write-Host $Fail
+                  if (-not $Continue) { exit 1 }
+                  return $false
+              }
+              Write-Host $Pass
+              return $true
+          }
+          '@ | Set-Content -Path (Join-Path $private "guard.ps1")
+          "guard: ready"
+          exit 0
+
+      - name: Get the source
+        env:
+          DEPLOY_KEY: ${{ secrets.MIXFIT_APP_DEPLOY_KEY }}
+          REF: ${{ inputs.ref }}
+        run: |
+          . (Join-Path $env:RUNNER_TEMP "private/guard.ps1")
+          [void](Guard "source" "source: fetched" "source: failed" {
+              if ($env:REF -notmatch '^[A-Za-z0-9._/-]{1,200}$') { throw "the ref is not a name" }
+              $key = Join-Path $private "deploy_key"
+              [IO.File]::WriteAllText($key, ($env:DEPLOY_KEY.Trim() + "`n"))
+              icacls $key /inheritance:r /grant:r "$($env:USERNAME):R"
+              $slashed = $private.Replace("\", "/")
+              $env:GIT_SSH_COMMAND = "ssh -i $slashed/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=$slashed/known_hosts"
+              git init -q $src
+              git -C $src remote add origin git@github.com:plep7/mixfit-app.git
+              git -C $src fetch -q --depth 1 origin $env:REF
+              git -C $src checkout -q FETCH_HEAD
+              Remove-Item $key -Force
+          })
+          exit 0
+
+      - name: Install the pinned ffmpeg
+        run: |
+          . (Join-Path $env:RUNNER_TEMP "private/guard.ps1")
+          [void](Guard "ffmpeg" "ffmpeg: ready" "ffmpeg: failed" {
+              $url = "https://github.com/GyanD/codexffmpeg/releases/download/$env:FFMPEG_VERSION/ffmpeg-$env:FFMPEG_VERSION-essentials_build.zip"
+              $zip = Join-Path $env:RUNNER_TEMP "ffmpeg.zip"
+              Invoke-WebRequest -Uri $url -OutFile $zip
+              $actual = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLower()
+              if ($actual -ne $env:FFMPEG_SHA256) { throw "ffmpeg checksum mismatch: $actual" }
+              Expand-Archive $zip -DestinationPath $env:RUNNER_TEMP
+              $bin = Join-Path $env:RUNNER_TEMP "ffmpeg-$env:FFMPEG_VERSION-essentials_build\bin"
+              Add-Content $env:GITHUB_PATH $bin
+              $filters = & (Join-Path $bin "ffmpeg.exe") -hide_banner -filters
+              if (-not ($filters | Select-String -Pattern "\brubberband\b")) { throw "the pinned ffmpeg has no rubberband filter" }
+          })
+          exit 0
+
+      - name: Install the dependencies
+        run: |
+          . (Join-Path $env:RUNNER_TEMP "private/guard.ps1")
+          [void](Guard "dependencies" "dependencies: ready" "dependencies: failed" {
+              Push-Location $src
+              python -m pip install -r requirements.txt
+              npm ci
+              python -m app.usb.usb_export --fetch-baken
+              Pop-Location
+          })
+          exit 0
+
+      # A failed suite does not stop the run: the build and the window check still go on, and the last step fails.
+      - name: Run the tests
+        if: inputs.tests
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          . (Join-Path $env:RUNNER_TEMP "private/guard.ps1")
+          $ok = Guard "tests" "tests: passed" "tests: failed" -Continue {
+              Push-Location $src
+              python -m unittest discover -s tests -v
+              Pop-Location
+          }
+          if (-not $ok) { Set-Content -Path (Join-Path $private "tests-failed") -Value "1" }
+          exit 0
+
+      - name: Build the app
+        run: |
+          . (Join-Path $env:RUNNER_TEMP "private/guard.ps1")
+          [void](Guard "build" "build: passed" "build: failed" {
+              Push-Location $src
+              python tools/build_app.py
+              Pop-Location
+          })
+          Copy-Item (Join-Path $src "build/Mixfit-win64.zip") (Join-Path $out "app")
+          exit 0
+
+      # A shorter list than the release workflow's: what the window check and the self-test need, and that the source the
+      # zip ships is whole. The release workflow keeps the full list.
+      - name: Check the app folder
+        run: |
+          . (Join-Path $env:RUNNER_TEMP "private/guard.ps1")
+          [void](Guard "app-folder" "app folder: passed" "app folder: failed" {
+              Push-Location $src
+              $app = Join-Path $src "build/dist/Mixfit"
+              foreach ($f in "Mixfit.exe", "README.txt") {
+                  if (-not (Test-Path (Join-Path $app $f))) { throw "missing $f" }
+              }
+              foreach ($f in "node.exe", "ffmpeg.exe", "baken.exe", "Qt6Widgets.dll", "qwindows.dll", "vocals.onnx", "mixfit.ico") {
+                  if (-not (Get-ChildItem $app -Recurse -Filter $f)) { throw "missing $f" }
+              }
+              python tools/build_app.py --check-source (Join-Path $app "source")
+              $version = python -c "import app; print(app.__version__)"
+              $product = (Get-Item (Join-Path $app "Mixfit.exe")).VersionInfo.ProductVersion
+              if ($product -ne $version) { throw "exe says version $product, not $version" }
+              Pop-Location
+          })
+          exit 0
+
+      - name: Run the built app's self-test
+        run: |
+          . (Join-Path $env:RUNNER_TEMP "private/guard.ps1")
+          [void](Guard "selftest" "selftest: passed" "selftest: failed" {
+              Push-Location $src
+              $music = Join-Path $env:RUNNER_TEMP "music"
+              New-Item -ItemType Directory $music | Out-Null
+              ffmpeg -hide_banner -loglevel error -f lavfi -i "sine=frequency=220:duration=20" (Join-Path $music "Test Artist - Test Title.wav")
+              $result = Join-Path $env:RUNNER_TEMP "selftest.json"
+              $stick = Join-Path $env:RUNNER_TEMP "stick"
+              New-Item -ItemType Directory $stick | Out-Null
+              $p = Start-Process -FilePath (Join-Path $src "build/dist/Mixfit/Mixfit.exe") -ArgumentList "--selftest", "`"$music`"", "`"$result`"", "`"$stick`"" -Wait -PassThru
+              if ($p.ExitCode -ne 0) { throw "selftest exited with $($p.ExitCode)" }
+              $json = Get-Content $result -Raw | ConvertFrom-Json
+              if ($json.error -or -not $json.key) { throw "selftest produced no key" }
+              if (-not (Test-Path (Join-Path $stick "PIONEER/rekordbox/export.pdb"))) { throw "selftest wrote no stick library" }
+              Pop-Location
+          })
+          exit 0
+
+      - name: Unpack the zip
+        run: |
+          . (Join-Path $env:RUNNER_TEMP "private/guard.ps1")
+          [void](Guard "unpack" "unpack: passed" "unpack: failed" {
+              Expand-Archive (Join-Path $out "app/Mixfit-win64.zip") -DestinationPath (Join-Path $env:RUNNER_TEMP "app")
+          })
+          exit 0
+
+      # Starts the app from the unpacked zip on this runner's real desktop and captures a tooltip, a tooltip with its
+      # shortcut and the ? shortcuts sheet (tools/window_check.py in the source). Its output stays in the private folder;
+      # a failure prints only the fixed code the script ends with, after the same check that it is plain words.
+      - name: Look at the popups in the built app
+        run: |
+          . (Join-Path $env:RUNNER_TEMP "private/guard.ps1")
+          $log = Join-Path $private "window-check.log"
+          $code = 1
+          try {
+              $exe = Join-Path $env:RUNNER_TEMP "app/Mixfit/Mixfit.exe"
+              Push-Location $src
+              python tools/window_check.py $exe (Join-Path $private "captures") *> $log
+              $code = $LASTEXITCODE
+              Pop-Location
+          } catch {
+              ($_ | Out-String) | Out-File -FilePath $log -Append
+          }
+          if ($code -eq 0) {
+              Get-ChildItem (Join-Path $private "captures") -Filter *.png | Copy-Item -Destination (Join-Path $out "captures")
+              "window check: passed"
+              exit 0
+          }
+          $said = Select-String -Path $log -Pattern '^window check code: ([a-z0-9:-]{1,60})$' | Select-Object -Last 1
+          if ($said) { "window check: failed ($($said.Matches[0].Groups[1].Value))" } else { "window check: failed" }
+          exit 1
+
+      - name: Keep the built app
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mixfit-win64
+          path: ${{ runner.temp }}/public-out/app
+          retention-days: 1
+          if-no-files-found: ignore
+
+      - name: Keep the captures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: window-captures
+          path: ${{ runner.temp }}/public-out/captures
+          retention-days: 1
+          if-no-files-found: ignore
+
+      - name: Result
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          if ($env:JOB_STATUS -ne "success" -or (Test-Path (Join-Path $env:RUNNER_TEMP "private/tests-failed"))) { "result: failed"; exit 1 }
+          "result: passed"
+          exit 0
