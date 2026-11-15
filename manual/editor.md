@@ -9,7 +9,7 @@ Those cues can come from the analysis, from your own habits or from what you set
 ## Track editor
 
 To open the editor, select a track and press E (Return on Windows, Cmd+Down on macOS).
-You can also double-click the track's waveform or hit **Edit track**.
+You can also double-click the track in the table or hit **Edit track**.
 The back arrow or Esc takes you back to the table.
 **Previous** and **Next** on the [player bar](window.md#the-player-bar) step through tracks.
 Hover over any button and its tooltip shows the button's name and key.
@@ -23,7 +23,12 @@ When the run finishes, the editor reopens right where you were.
 **Play** is the round white button on the player bar.
 Click the waveform, the whole-track strip or the player bar to move the playhead.
 Drag the waveform to look around, and scroll it with the wheel.
+Drag the small bar under the waveform up or down to set how tall it is, and the cue list takes the room.
+The height is one for every track, and Mixfit remembers it.
+Double-click the bar to get the usual height back.
+You can also Tab to the bar and press Up or Down, with Shift for bigger steps.
 To zoom, use the magnifier buttons, press **+** and **-**, or hold Ctrl or Cmd and turn the wheel.
+The two deepest zooms draw the waveform just as it was measured, with no smoothing, so a kick has a clear edge to set a grid line on.
 What you hear lines up exactly with the grid.
 A stock player would be slightly off.
 **Click** (the metronome button) adds a metronome that ticks higher on a bar's first beat.
@@ -38,8 +43,10 @@ Playback is tuned not to pop, crackle or drop out, Bluetooth included.
 
 The beat lines show the grid exactly as it will be written.
 Bar lines are stronger and numbered.
+Every line has small triangles at its top and foot, bigger for a bar line than for a beat line, so you can tell them apart even where the waveform is busy.
+The playhead is pink, with the biggest triangles, so it never looks like a grid line.
 White lines are where the analysis put them.
-Mint lines are yours: a line you moved, or a bar line on what was a plain beat.
+Mint lines are yours, triangles and all: a line you moved, or a bar line on what was a plain beat.
 After you set a new tempo, the beat that the BPM box kept stays white and the rest go mint.
 **Back to the analysis** in History turns them all white again.
 
@@ -89,7 +96,7 @@ No key reading is right every time, so the editor lets you check a track's key a
 
 ![The key check under the hot cue pads, with the relative major of the track's key sounding over it](../images/key-check.png)
 
-Press **Check the key by ear** (the tuning fork next to Click) or K, and a strip of keys opens under the pads.
+Press **Check the key by ear** (the tuning fork beside the key at the top right) or K, and a strip of keys opens under the pads.
 Press it again to close the strip.
 The command palette opens it too, and double-clicking a track's Key cell in the table opens the editor with the strip already open.
 The keys run round the Camelot wheel, minor keys on top and major keys under them, so the keys you'd weigh against each other sit side by side.

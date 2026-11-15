@@ -81,7 +81,7 @@ After that it [updates itself](manual/updates.md).
 
 1. Drop a folder of tracks on the window, or use **Add folder...**.
 2. Wait for the analysis, then look at the Check column: hover over a check to see why a track is worth a listen.
-3. Fix any name by double-clicking it, and pick what Apply does in [Settings](manual/settings.md).
+3. Fix any name by clicking it once its track is selected, and pick what Apply does in [Settings](manual/settings.md).
 4. Press **Apply** to write tags and names, and **Undo last Apply** if you change your mind.
 5. Take the tracks out: [rekordbox cues](manual/editor.md#cue-points), a [USB stick](manual/usb.md) or [another app](manual/sync.md).
 
