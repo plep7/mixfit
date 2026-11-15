@@ -11,9 +11,9 @@ When you press Apply, Mixfit writes all this into your files.
 
 | Measure | What you get |
 | --- | --- |
-| **Key** | Camelot (8A) or musical (Am). It's read with a profile made for dance music, and a second reading cross-checks it. With [stems](#sharpened-by-stems), it's read from the bass and other sounds alone. |
+| **Key** | Camelot (8A) or musical (Am). It's read with a profile made for dance music, and a second reading cross-checks it. With [stems](#sharpened-by-stems), it's read from the bass and other sounds alone. If it sounds wrong, [check it by ear](editor.md#checking-the-key-by-ear) and set the right one. |
 | **BPM** | Worked out from the beat spacing over the whole track. Half and double time are corrected (87.5 → 175, 62 → 124). Then it's rounded to a whole BPM, with a half rounding up. |
-| **Beat grid and bars** | An even grid on the kick. Bars start where the kick comes back after a break, where sections change and where the chords turn. A learned beat tracker gives a second opinion on the beat and the bar, which settles `bars?` where the two agree. With [stems](#sharpened-by-stems), where a bar starts is read from the drums alone. |
+| **Beat grid and bars** | An even grid, each line where the kick starts. Bars start where the kick comes back after a break, where sections change and where the chords turn. A learned beat tracker gives a second opinion on the beat and the bar, which settles `bars?` where the two agree. With [stems](#sharpened-by-stems), where a bar starts is read from the drums alone. |
 | **Energy** | A level from 1 to 10, as Mixfit's own estimate. See [Energy level](#energy-level). |
 | **Loudness** | LUFS and true peak, which Mixfit only measures. See [Loudness](#loudness). |
 | **Vocals** | About how much of the track has a voice, and where. It's a hint. With [stems](#sharpened-by-stems), it comes from the vocal's own level. See [Vocals](#vocals). |
@@ -33,6 +33,9 @@ When you press Apply, Mixfit writes all this into your files.
 
 - If you drop a folder in again, only new files get analysed, along with files whose size or modification time changed.
   The other files show `remembered` in the Check column.
+- In the window, a file whose tags another app changed keeps its results, as long as its audio is the same.
+  Mixfit reads its new tags in the background.
+  A track analysed by an older version gets analysed again once, the first time its file changes.
 - Results follow a track when you rename it in the window, and when you undo that rename.
   Remembered tracks still re-fold when you change the BPM range.
 - Results live in your library (`~/Library/Application Support/Mixfit/library.db` on macOS, `%APPDATA%\Mixfit\library.db` on Windows), never in your music folders.
@@ -49,7 +52,7 @@ The Check column flags tracks worth a listen:
 
 | Check | Means |
 | --- | --- |
-| `key?` | The key is uncertain. |
+| `key?` | The key is uncertain. [Check it by ear](editor.md#checking-the-key-by-ear) in the editor. |
 | `bpm?` | The tempo is unsteady. |
 | `bars?` | Mixfit is unsure where the beat or the bar starts. |
 | `grid?` | The grid from your rekordbox collection disagrees with Mixfit's. |
@@ -57,6 +60,7 @@ The Check column flags tracks worth a listen:
 | `cleaned` | Another tool's key or energy text was removed from the name ([details](tags.md#key-and-energy-text-from-other-tools)). |
 | `name?` | No artist was found. |
 | `partial` | The file is over 40 minutes, so only the start is analysed. |
+| `changed` | The file changed after you [locked](editor.md#lock) the track, so its grid and cues may not fit new audio. |
 
 A track whose analysis was [sharpened by its stems](#sharpened-by-stems) also shows a quiet `stems`.
 
@@ -214,7 +218,7 @@ Vocal parts on generated tracks with a voice were much more accurate.
 Nobody has checked bar 1, keys or vocals of real music by ear yet, so it's new: trust your ears over it.
 
 **What it costs.**
-It uses the same model as Automix's [stems moves](automix.md#stems), downloaded once after you agree.
+It uses the same model as Automix's [stems moves](stems.md), downloaded once after you agree.
 It runs in the background, slowly, so it never gets in your way, and shows as **Separate stems** in Activity, where you can pause or cancel it.
 It goes through your whole library, one track at a time, after anything Automix needs.
 A track takes about a third of its length on an idle M1 Pro.

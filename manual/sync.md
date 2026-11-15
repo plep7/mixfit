@@ -65,6 +65,7 @@ The preview tells you which tracks stay out.
   The library as it stands then gets saved beside the backup.
   Serato rewrites its files every time it closes, so expect that warning with Serato.
 - **Music files only change for Serato's cues.** Even then, they change only if the audio comes out the same.
+  Each file keeps its created date and its Finder tags and comments.
   Undo takes those cue tags off again, unless Serato has changed them since.
 
 Mixfit hasn't measured cue timing in these apps itself.

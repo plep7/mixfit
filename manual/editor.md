@@ -1,6 +1,6 @@
 # Track editor and cues
 
-The track editor is where you listen to a track and fix its beat grid, cues and phrases by ear.
+The track editor is where you listen to a track and fix its beat grid, cues, phrases and key by ear.
 Apply gets cue points ready for rekordbox.
 Those cues can come from the analysis, from your own habits or from what you set here.
 
@@ -83,6 +83,56 @@ Each pad is edged in its cue's color and shows the cue's name and time.
 - In a really short window, the pads hide.
   The keys still work, and the list still shows every cue.
 
+### Checking the key by ear
+
+No key reading is right every time, so the editor lets you check a track's key against your own ears and fix it on the spot.
+
+![The key check under the hot cue pads, with the relative major of the track's key sounding over it](../images/key-check.png)
+
+Press **Check the key by ear** (the tuning fork next to Click) or K, and a strip of keys opens under the pads.
+Press it again to close the strip.
+The command palette opens it too, and double-clicking a track's Key cell in the table opens the editor with the strip already open.
+The keys run round the Camelot wheel, minor keys on top and major keys under them, so the keys you'd weigh against each other sit side by side.
+Each one has its key's color and its name as the table shows it, and the track's key is filled in.
+Click the key in the editor's title row to switch every key on screen between 8A and Am.
+
+- Click a key to hear its chord over the track for a bar.
+  Hold it down to keep the chord going.
+  It plays with the track paused too, so you can hear a key on its own.
+- **Root only** plays the key's root note instead of the chord, which helps when you're checking against a bassline.
+  Leave it off for most checks, because only the full chord tells a minor key from its major.
+- **Octave** moves the chord down or up, two steps each way, so it clears a bassline or a lead that sits where the chord does.
+- **Level** makes the chord louder or quieter.
+  It starts just loud enough to hear over what's playing around the playhead.
+- **Tone** picks **Pure**, a clean note that's easy to place, or **Warm**, a rounder note that cuts through a busy track.
+- The chord follows the track's tuning, so a record pressed a little sharp doesn't clash with it.
+
+Mixfit remembers Octave, Level and Tone for next time.
+
+The line under the keys says what the analysis found and how sure it was.
+On a track with `key?`, a dashed ring marks the second reading, so you can hear both.
+If you're hearing the key with the same number and the other letter, like 8B against 8A, the line tells you it's the relative major or minor.
+Those two share their notes and mix the same way, so pick the one the track settles on.
+A track that changes key still gets one key, like it does in every DJ app.
+Scrub to the part you mix out of or into, listen there, and set that key.
+
+**Use this key** makes the last key you heard the track's key.
+Double-clicking a key does the same.
+Your key fills its chip, the analysis's key keeps a thin ring, and the line says what Apply will write.
+**Use the analysis key** puts the analysis's key back.
+Undo, Redo and History step through key changes along with your grid and cue changes.
+**Back to the analysis** in History takes the key back with the rest.
+In a short window, the pads, then the cue list, then the grid and phrase tools make room for the open strip.
+
+A key you set by ear works everywhere a key does:
+
+- Its row gets the pencil, and `key?` comes off, because your ears decided.
+  Hover the Key cell to see that you set it and what the analysis read.
+- Harmonic match, sorting, search, filters, matchlists, Related tracks and Automix all go by it.
+- Apply writes it to the tags, the front of the comment and the file name, and Undo last Apply takes it back.
+- It goes to the rekordbox XML, USB sticks, Serato, Traktor, Engine DJ and Export CSV.
+- It stays through a new analysis, and copies of the track share it, as the editor's other changes do.
+
 ### Vocals on the waveform
 
 A yellow line along the foot of the waveform and the whole-track strip marks where the analysis hears a voice.
@@ -110,12 +160,16 @@ In a narrow window, the list's buttons move up next to the playhead's time.
 - **Go to** jumps to the selected cue.
   **Delete** or the Delete key removes it.
 
+Press ? to see these keys in a sheet.
+A button that has a key names it in its tooltip.
+
 | Key | What it does |
 | --- | --- |
 | Space | Play or pause |
 | Left, Right | Step back or forward a beat, or a bar with Shift |
 | + and - | Zoom |
 | M | Turn Click on or off |
+| K | Open or close the key check |
 | T | Tap |
 | C | Add a cue |
 | 1 to 8 | Go to the hot cue on pad A to H, or set one at the playhead on an empty pad |
@@ -165,7 +219,7 @@ Copies of a track share its edits.
 New audio under the same name starts fresh.
 
 An edited track gets a pencil in the Check column of its row.
-The table, tags and names pick up the new tempo, as a whole number.
+The table, tags and names pick up the new tempo, as a whole number, and any [key you set by ear](#checking-the-key-by-ear).
 With **Make rekordbox cues** on, Apply sends the grid and cues to rekordbox, as [Cue points](#cue-points) explains.
 The cues you set here are the only cues the track gets, and they replace any cues it had.
 Each cue goes on the pad you gave it, whatever kind of cue Settings makes.
@@ -176,11 +230,14 @@ The command line doesn't read these edits.
 
 ### Lock
 
-**Lock** (the padlock) freezes a track's grid, cues and phrases until you unlock it.
+**Lock** (the padlock) freezes a track's grid, cues, phrases and key until you unlock it.
 A locked track's row shows a padlock.
 You can still play a locked track.
+The [key check](#checking-the-key-by-ear) still plays its chords, but **Use this key** waits until you unlock the track.
 It won't be analysed again when its file changes.
-If an update changes the analysis, the track is measured once more, but it keeps its cues and phrases.
+Its names and comment are read from the file again, and its row shows `changed`.
+If the audio is new, unlock the track to analyse it again.
+If an update changes the analysis, the track is measured once more, but it keeps its cues, phrases and key.
 If the library remembers a track from before the app kept waveforms, that track gets analysed again once, the first time you open it.
 
 ## Cue points
@@ -239,7 +296,7 @@ So is a memory cue on a spot that already has one.
 
 ### Cues from stems
 
-A track separated into [stems](automix.md#stems) gets memory cues where its stems say something changes, each on a bar line of its grid:
+A track separated into [stems](stems.md) gets memory cues where its stems say something changes, each on a bar line of its grid:
 
 - **Vocal in**: a vocal comes in after at least 8 bars without one, which also marks where a vocal-free intro ends.
 - **Vocal out**: the last vocal ends with at least 8 bars to go, the start of a vocal-free outro, where the next track's vocal can come in.

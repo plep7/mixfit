@@ -13,9 +13,13 @@ Most pages start with a picture, so you know where you are.
 | [The window](window.md) | The track table, search, filters, sorting, the player bar, keys and the command palette |
 | [Analysis](analysis.md) | How key, BPM, grid, energy, loudness, vocals, phrases and waveforms get measured, the checks, and how far you can trust each one |
 | [Tags, names and Apply](tags.md) | What Apply writes, file name and title formats, keys in rekordbox, cover art, ReplayGain and Undo |
-| [Library and playlists](library.md) | The library, Activity, playlists, matchlists, Track info, Smart Fixes, missing files, duplicates, watch folders, backups, imports, related tracks, hot cue banks and track suggestion |
-| [Track editor and cues](editor.md) | Setting a grid, cues and phrases by ear, the cues Apply makes for rekordbox, learning your own cues, cue history and Hot Cue Auto Load |
-| [Automix](automix.md) | Building a set, the set flow, previewing transitions, rendering a mix and playing live |
+| [Library and playlists](library.md) | The library, Activity, playlists, matchlists, Track info, Smart Fixes, missing files, duplicates, watch folders, backups, imports, related tracks, Mix with, hot cue banks and track suggestion |
+| [Track editor and cues](editor.md) | Setting a grid, cues, phrases and the key by ear, the cues Apply makes for rekordbox, learning your own cues, cue history and Hot Cue Auto Load |
+| [Automix](automix.md) | Building a set and the set flow |
+| [Transition preview](transitions.md) | Hearing a step before you play it out, where the mix goes, its style and changing it |
+| [Stems](stems.md) | Each track's vocals, drums and bass for Automix and Play live, and acapella and instrumental files |
+| [Export mix](export-mix.md) | The whole set rendered to one file |
+| [Play live](play-live.md) | The set as one continuous mix, with the stem buttons |
 | [USB and players](usb.md) | Writing a stick for CDJ and XDJ players, and My Settings |
 | [Sync](sync.md) | Your playlists in rekordbox's XML, and syncing to Serato, Traktor and Engine DJ |
 | [Settings](settings.md) | Every setting, the background, the audio output and where your data lives |
@@ -43,7 +47,7 @@ The stems model's graph is the network of HTDemucs from [Demucs](https://github.
 `app/analysis/models/export_stems.py` makes that graph, with none of the model's weights in it.
 ONNX Runtime (MIT) runs the graph.
 The weights are downloaded only if you turn stems on.
-Their author says "The model weights are not covered by the MIT license, and are provided only for scientific purposes" ([the statement](https://github.com/facebookresearch/demucs/issues/327), see [Stems](automix.md#stems)).
+Their author says "The model weights are not covered by the MIT license, and are provided only for scientific purposes" ([the statement](https://github.com/facebookresearch/demucs/issues/327), see [Stems](stems.md)).
 
 The vocal model also gives Track Suggestion's Collection Radar what it hears.
 `app/analysis/models/export_vocals.py` cuts this model down from `frame_mn06` of [PretrainedSED](https://github.com/fschmid56/PretrainedSED) (MIT, `licenses/PretrainedSED-MIT.txt`).
@@ -51,7 +55,7 @@ The vocal model also gives Track Suggestion's Collection Radar what it hears.
 The beat model, the second opinion on the beat grid, is the small model of [Beat This!](https://github.com/CPJKU/beat_this) (MIT for its code and weights, `licenses/BeatThis-MIT.txt`).
 `app/analysis/models/export_beats.py` exports it whole.
 
-The waveform rules in `worker.js` come from [baken](https://github.com/M-Igashi/baken) too (MIT, `licenses/baken-MIT.txt`).
+The waveform rules in `worker.js`'s `wave_file.js` come from [baken](https://github.com/M-Igashi/baken) too (MIT, `licenses/baken-MIT.txt`).
 
 The My Settings format and the test fixtures in tests/my_settings_samples.json come from two projects:
 

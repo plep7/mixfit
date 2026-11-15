@@ -10,13 +10,17 @@ Undo takes all of it back.
 
 Mixfit reads MP3, WAV, AIFF, FLAC, M4A/AAC, OGG/Opus and WMA files.
 It writes the key, BPM, artist and title where rekordbox, Serato, Traktor and Mixxx look for them.
+A file that lists two artists or two genres keeps both, unless you change the artist.
+If you change a name in another app while Mixfit shows the track, Apply leaves that file alone and reads its names again ([When Apply cannot write a file](#when-apply-cannot-write-a-file)).
 In tags and file names, the BPM is a whole number.
 Only the beat grid in the rekordbox XML keeps the decimals ([Cue points](editor.md#cue-points)).
 rekordbox reads no WAV tags, though, so see [Keys in rekordbox](#keys-in-rekordbox).
 
-**The key goes at the front of the comment**, in your Key format, so `promo copy` becomes `8A - promo copy`.
+**The key goes at the front of the comment**, in your *Key format in tags and names*, so `promo copy` becomes `8A - promo copy`.
+Showing keys the other way in Mixfit never changes what Apply writes.
 Your own text stays.
 If the comment already starts with an old key, Apply replaces that key instead of adding a second one, whichever tool wrote it.
+A comment that another tagger saved in a language other than English counts as the comment too.
 A Mixed In Key energy level also stays, unless you tick *Add energy to comment*.
 So `10A - Energy 6 - promo copy` becomes `8A - Energy 6 - promo copy` ([Energy level](analysis.md#energy-level)).
 
@@ -25,6 +29,9 @@ If a description holds nothing but an old key, Apply clears it and moves any ene
 Apply leaves any other text in the description alone, and Undo puts a cleared description back.
 The Comment column and `--dry-run` show each new comment before Apply writes it.
 When Apply will clear a description, they add `(clears DESCRIPTION)`, and the row says `cleaned`.
+
+Apply lets go of the files first: the editor and the track playing from the list stop, and so does a [live set](play-live.md) that plays any of them, once you say so.
+[Stems](stems.md) wait while Apply writes, and then go on under the new names.
 
 ### Old prefixes
 
@@ -57,6 +64,7 @@ To read the full message, hover over the badge or select the row.
 | `access denied` | Another account owns it, or Windows Controlled folder access protects the folder |
 | `missing` | Moved, deleted, or its drive unplugged |
 | `disk full` | No room left on the drive |
+| `changed outside` | Its artist or title changed in another app after Mixfit read it: the row now shows the new names, so check them and Apply again |
 
 The summary counts these files, like `2 not written: 1 read-only, 1 in use`.
 The command line prints the reason for each file.
@@ -76,13 +84,14 @@ Then pick that file with **Choose XML...** under *rekordbox collection* in [Sett
 The tracks in that collection keep their names under any format, and they still get their tags.
 Their rows read `(keeps its name: in your rekordbox collection)`.
 Mixfit only reads the XML, and it never touches rekordbox's database.
-Mixfit reads the export again each time it starts, so export again after you add tracks to rekordbox.
+Mixfit reads the export again each time it starts, and before Apply or an export if rekordbox has written over it since.
+So export again after you add tracks or set cues in rekordbox, and Mixfit picks it up.
 **Forget** stops using the export.
 
 ## File name and title formats
 
 A format is text with tokens in it: `{key}`, `{bpm}`, `{energy}`, `{artist}` and `{title}`.
-`{key}` follows your Key format (`8A` or `Am`).
+`{key}` follows your *Key format in tags and names* (`8A` or `Am`).
 `{energy}` is just the [energy](analysis.md#energy-level) number, so write `Energy {energy}` if you want a label.
 Set the file name format under *Rename files* in Settings.
 An example shows under the box, and the New file name column updates as you type.
@@ -218,9 +227,12 @@ With the option off, Apply and Undo leave ReplayGain tags alone.
 
 ## Undo
 
-Mixfit logs every Apply and every [Smart Fix](library.md#smart-fixes) to a `changes-<time>.csv` file.
+Mixfit logs every Apply and every [Smart Fix](library.md#smart-fixes) to a `changes-<time>.csv` file, before it changes the file.
 **Undo last Apply** puts back the latest batch's names, tags, cleared descriptions, covers and rekordbox cues, and that includes renamed files.
-On the command line, `python -m app.cli --undo changes-<time>.csv` does the same for that log.
+It asks first and names the day and time of the Apply it takes back.
+A tag you changed since then, in another app or by hand, keeps your change, and the summary counts the files that kept newer tags.
+If a file can't go back, say because another program has it open, it keeps Apply's name and tags together, and the next **Undo last Apply** tries it again.
+On the command line, `python -m app.cli --undo changes-<time>.csv` does the same for that log, and the window's library follows.
 The window keeps its logs in the [app data folder](settings.md#where-your-data-lives).
 The command line writes its logs beside the `--csv` file, or in the current folder.
 Logs from older versions only hold renames, and undoing them still puts the old names back.
