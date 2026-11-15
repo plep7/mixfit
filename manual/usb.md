@@ -16,12 +16,12 @@ So use a spare stick, and run through the [test kit](../usb-test-kit/README.md).
   The playlist takes the name of whichever playlist is showing.
   To put your whole playlist tree on instead, pick **My playlists, with their folders**.
   Then you can browse the tree on the player.
-- An Automix set gets a memory cue at each mix that [Export mix](automix.md#export-mix) plans.
+- An Automix set gets a memory cue at each mix that [Export mix](export-mix.md) plans.
 - The stick gets the cues you chose under *Make rekordbox cues* ([Cue points](editor.md#cue-points)).
   These include memory cues, loops and bar cues.
   Each track's [Hot Cue Auto Load](editor.md#hot-cue-auto-load) flag goes on too.
   A track that's in your rekordbox collection keeps its own cues and grid.
-- Keys show in your Key format.
+- Keys show in your *Key format in tags and names*.
 - Your [My Tags](library.md#rating-color-track-info-and-my-tag) go on under their columns, so a player's My Tag filter can list them.
   They're in each track's comment as text too.
   No real player has shown these tags yet.

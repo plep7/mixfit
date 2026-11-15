@@ -73,8 +73,8 @@ If your system asks for less motion (Reduce Motion on a Mac, Animation effects o
 
 ## The table
 
-Each row shows the cover, key, BPM, energy, loudness, vocals, title and artist, waveform, new file name and checks.
-[Analysis](analysis.md) explains what each one means.
+Each row shows the cover, a mix mark, key, BPM, energy, loudness, vocals, title and artist, waveform, new file name and checks.
+[Analysis](analysis.md) explains what each one means, and [Mix with](library.md#mix-with) explains the mark.
 
 - **Rows:** View > Rows lets you pick compact or comfortable rows.
   Compact rows take one line.
@@ -83,13 +83,18 @@ Each row shows the cover, key, BPM, energy, loudness, vocals, title and artist, 
   A bold tick marks the same key, and a fine tick marks a key one step away.
   View > Harmonic match picks Strict, Fuzzy or Off.
   For 8A, Strict matches 7A, 9A and 8B, and Fuzzy adds 7B and 9B.
+- **Checking a key:** double-click a track's key to open the editor on its [key check](editor.md#checking-the-key-by-ear), where you hear keys against the track and set the right one.
+  Hover a key you set there to see what the analysis read.
 - **Columns:** to show or hide a column, right-click the header or go to View > Columns.
   Artist, Comment and Plays start hidden, because the title already shows the artist and the comment mostly repeats the key.
   Drag a heading to reorder the columns, and drag a separator to resize one.
+  Only that column changes, and the ones after it move over.
+  The window and the panel never resize or hide a column.
+  When the columns are wider than the table, a scroll bar appears under it, and the cover and Track column scroll with the others.
+  When they are narrower, the room on the right stays empty.
   Double-click a separator to fit the column to its contents.
-  The app remembers your layout for next time, and **Reset columns** brings back the default.
-  In a narrow window, or with the panel open, some columns step aside so the title keeps its room.
-  They go in this order: Vocals, Loudness, Energy, Waveform and New file name.
+  **Fit columns to window** scales every column to fill the table once, and **Fit columns to contents** fits every column to what it holds.
+  The app remembers your layout for next time, and **Reset columns** brings back the default order and columns, fitted to the window.
 - **Editing:** double-click the artist (or *Add artist*) to edit it.
   F2 (Return on macOS) edits the title.
 - **Search:** type some words, and the table shows only the tracks that have all of them.
@@ -153,7 +158,7 @@ A clock on the cover means the track is waiting for analysis, and a spinner mean
 Before the checks, a row can show three marks:
 
 - A padlock means the track is locked.
-- A pencil means its grid or cues were edited.
+- A pencil means you changed its grid, cues or key in the [editor](editor.md#keeping-it).
 - A flag means it has cues meant for it: yours, from rekordbox, imported, or made by Apply.
 
 Cues that the analysis only suggests show on the waveform instead.
@@ -178,7 +183,7 @@ Opening the editor, Apply or Undo last Apply stops the sound.
 ## The player bar
 
 Everything plays from one bar along the bottom of the window.
-That covers a track from the list, the [editor](editor.md#track-editor), a [transition](automix.md#transition-preview) and the [live set](automix.md#play-live).
+That covers a track from the list, the [editor](editor.md#track-editor), a [transition](transitions.md) and the [live set](play-live.md).
 Previous, Play and Next sit over a progress bar that shows the time gone and the time left.
 The left side of the player bar tells you what's playing (`TRACK`, `TRACK EDITOR`, `TRANSITION PREVIEW` or `LIVE SET`).
 The right side tells you what Next goes to.
@@ -213,6 +218,9 @@ You can do everything from the keyboard and with a screen reader.
 The screen reader also hears when analysis starts and ends, and what Apply did.
 Tab goes through the window from the sidebar to the player bar, and a box round a list, table or text box shows where you are.
 Tab onto an icon button shows what it does, and Esc hides that.
+A button that has a key names it in its tooltip.
+Press ? to open a sheet of the keys of the screen you are on, the track list or the [editor](editor.md#track-editor), and Esc to close it.
+The sheet is also in the [command palette](#command-palette) and under Help > Keyboard shortcuts.
 A window opens on the first thing you would type in.
 
 | Key | Does |
@@ -220,6 +228,7 @@ A window opens on the first thing you would type in.
 | Tab | Move between controls |
 | Arrow keys | Move through the table |
 | F2 (Return on macOS) | Edit the title |
+| ? | The sheet of keys for this screen |
 | Space | Play or pause |
 | Esc | Stop |
 | Delete | Remove the selected rows |

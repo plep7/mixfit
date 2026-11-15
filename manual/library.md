@@ -13,6 +13,7 @@ It lives in the app data folder (`~/Library/Application Support/Mixfit/` or `%AP
 The sidebar's **Library** and **Playlists** headings hold these lists:
 
 - **This batch** holds the tracks you've added since you opened the window, so Apply can tag new tracks without touching the rest.
+  A name, rating or comment you change in any list shows here too.
 - **Incoming** holds the tracks your [watch folders](#watch-folders-and-incoming) brought in.
 - **Collection** holds every track.
 - **Folders and playlists** can nest as deep as you like.
@@ -164,13 +165,14 @@ If you run it again, it only adds the missing ones.
 - A track with an older analysis matches on its old BPM, key and time until it's analysed again.
 - Tags are read in the background, so a track can show up in a matchlist a moment after analysis.
   The first start after an update reads every file's tags once.
+- When another app changes a track's tags, its matchlists follow once Mixfit reads them again in the background.
+  That happens at start and after each analysis, Apply or Undo.
 
 ## Rating, color, Track info and My Tag
 
 Right-click tracks to set their **Rating**, **Color** or **My Tag**.
 Each of these gets a sortable column in the Collection and in playlists, alongside genre, label and year.
-A narrow window hides these columns, and Rating is the last to go.
-The Title tooltip still shows them all.
+The Title tooltip shows them all, whichever columns you show.
 
 **Track info** (Ctrl/Cmd + I) also edits genre, label, year and comment.
 
@@ -220,6 +222,7 @@ Each write is logged, so **Undo last Apply** can take back the latest fix ([Undo
 A title keeps any text that your title format adds, such as the key at the front.
 A comment keeps its key.
 A genre or comment you set in Track info gets replaced too, and Undo restores it.
+A track whose title or artist changed in another app since you opened Smart Fixes is left alone, and its row shows the new names.
 
 ## Moving tracks
 
@@ -382,7 +385,7 @@ History has a folder per year, and each set is named `HISTORY yyyy-mm-dd`.
 ## Related tracks and hot cue banks
 
 The tabs over the right side of the table open a panel.
-The panel has four tabs: Related tracks, [Track suggestion](#track-suggestion), Hot cue banks and the [Second list](#second-list).
+The panel has five tabs: Related tracks, [Track suggestion](#track-suggestion), [Mix with](#mix-with), Hot cue banks and the [Second list](#second-list).
 Each tab works on the track selected in it.
 **Related tracks 12** counts the matches, even with the panel closed.
 **Hot cue banks 3/8** counts the filled banks in the chosen list.
@@ -468,6 +471,42 @@ Folders in the tree can order lists too.
 For now, an export or **Write to rekordbox XML** puts each list's tracks in a `Hot Cue Bank Lists` folder.
 Each list becomes a playlist in bank order, so the tracks and cues still reach the stick.
 
+## Mix with
+
+**Mix with** says where, why and how two tracks go together, before you play them.
+It reads the same plan the [transition preview](transitions.md) plays, so the two never disagree.
+The pair is the track selected in the table and the track playing from the list.
+With nothing playing, select a track and press **Pin**, then select another: the pinned track is the other side of every pair until you unpin it.
+The heading names the two tracks, outgoing into incoming, and **Swap** turns the pair round.
+
+![The Mix with page: two tracks on one timeline, the mix in plain words, the voices and the other places considered](../images/mix-with.png)
+
+What the page shows, top to bottom:
+
+- **The two tracks on one timeline**, at the outgoing track's tempo, drawn as the preview draws them: colored bands are [phrases](analysis.md#phrases), yellow is a voice, white marks the mix point, red the bass swap and the pale band the blend.
+  A deeper yellow band marks where the two voices would sound at once.
+  Slide a track to move its mix point, as in the preview.
+- **The mix in words**: the style and how long it runs, then how well the two go together (`Mixes well`, `A bold move`, `Clashes` or `Unsure`) and why, in the set flow's words.
+  Under that, why the style was chosen, and every check that stands in the way: a key or tempo that is unsure, bars the analysis can't place, a phrase that doesn't line up.
+- **Voices**: how many seconds of the blend have a voice on both tracks, what Mixfit does about it, and how many the next best place would share.
+  With **Avoid vocal over vocal** off in the Automix settings, the page says the voices are allowed to overlap.
+- **Also considered**: every other place the planner weighed, best first, one line each.
+  Click one to mix there instead.
+  The line says where each track goes out and in, how long the blend runs, whether the voices stay apart and whether it ends on both tracks' phrases.
+
+**Play** renders the mix and plays it through the transition preview under the table, with no playlist needed.
+**Keep this mix** keeps the mix points and the style for the pair, in that order, as the preview keeps your changes.
+**Back to automatic** forgets them.
+A change you make in the preview shows here too.
+**Back to** the list you came from (or `Esc`) closes the page and the pair it opened under the table.
+
+The words are only as good as the phrases, grids and voices under them, so read the checks before you trust a verdict.
+Nobody has judged the page against real music by ear yet.
+
+**The Mix column.** Every row of the table, and of Related tracks, carries a mark for how it would mix after the reference track: the track playing, else the one pinned on this page, else the one selected.
+A dot mixes well, a ring is a bold move, a cross clashes and a dotted ring is unsure, as the [set flow](automix.md#set-flow) marks each step of a set.
+Hover a mark for why, and click the Mix heading to sort the best pairs first.
+
 ## Track suggestion
 
 **Track suggestion** lists tracks to play next, best first, like rekordbox's Track Suggestion.
@@ -499,7 +538,7 @@ It weighs three things the analysis already keeps, so it needs no stems to find 
 
 The best pairs come first: closer keys, less stretch and more of the vocal on the phrase lines.
 Every bound above is chosen from what DJs do, not set on pairs a person marked, and no suggested mashup has been judged by ear yet, so take a suggestion as a lead to listen to.
-To hear one, [export](automix.md#acapella-and-instrumental-files) the acapella and the instrumental.
+To hear one, [export](stems.md#acapella-and-instrumental-files) the acapella and the instrumental.
 
 ### How Collection Radar hears a track
 

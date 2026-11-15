@@ -1,4 +1,4 @@
-<img width="1280" height="640" alt="image" src="https://github.com/user-attachments/assets/08677749-bf40-4d34-9bb6-f865f4aa4ab1" />
+<img src="images/banner.png" width="1280" height="640" alt="Mixfit: key, BPM, beat grids, cues and tidy names for your DJ tracks, on macOS and Windows">
 
 ![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-blue) ![license](https://img.shields.io/badge/license-AGPL--3.0-green)
 
