@@ -395,8 +395,15 @@ Press the tab again, or the X, to close the panel.
 
 **Related tracks** lists tracks that go with the selected track, best first, with the reason why.
 It searches the Collection, or the folder or playlist you choose beside it.
-Double-click a result, or press Return on it, and the table shows that track.
+Double-click a result, or press Return on it, and the table selects that track.
+If the table's list doesn't hold it, the table shows the folder or playlist you searched in, or the Collection.
 The panel then follows, so you can walk from track to track.
+Press Space on a result, click its number (it turns into a play mark), or right-click > **Play** to hear it from the start, right there.
+Press again to pause it.
+The table, the selected track and the list stay where they were, and the player bar can seek.
+The result plays alone, without a blend, and Next and Previous wait until you pick another track to play.
+The table's Mix column and the Mix with page keep weighing against the selected track, not the result.
+To hear a result mixed with the selected track, use [Mix with](#mix-with).
 Drag results onto a playlist, or right-click > **Add to playlist**.
 
 The **condition** decides what counts as related.
@@ -511,7 +518,7 @@ Hover a mark for why, and click the Mix heading to sort the best pairs first.
 
 **Track suggestion** lists tracks to play next, best first, like rekordbox's Track Suggestion.
 It searches the Collection, or the folder or playlist you choose beside it.
-Its results work like the results in Related tracks (double-click, drag, right-click).
+Its results work like the results in Related tracks (play, double-click, drag, right-click).
 
 | Recommend by | What comes first |
 | --- | --- |

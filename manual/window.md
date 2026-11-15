@@ -95,8 +95,10 @@ Each row shows the cover, a mix mark, key, BPM, energy, loudness, vocals, title 
   Double-click a separator to fit the column to its contents.
   **Fit columns to window** scales every column to fill the table once, and **Fit columns to contents** fits every column to what it holds.
   The app remembers your layout for next time, and **Reset columns** brings back the default order and columns, fitted to the window.
-- **Editing:** double-click the artist (or *Add artist*) to edit it.
+- **Editing:** click the title or the artist (or *Add artist*) of the selected track to edit it, as you'd rename a file in Finder.
+  The click that selects a track never edits, and neither does a click with several tracks selected.
   F2 (Return on macOS) edits the title.
+  Double-click a track, anywhere on its row, to open it in the [track editor](editor.md#track-editor).
 - **Search:** type some words, and the table shows only the tracks that have all of them.
   The search looks in the title, artist, file name, key (in either notation), BPM, genre, label, comment and My Tags.
   Esc clears the search.
@@ -232,7 +234,7 @@ A window opens on the first thing you would type in.
 | Space | Play or pause |
 | Esc | Stop |
 | Delete | Remove the selected rows |
-| E, Return on Windows, Cmd+Down on macOS | Open the [track editor](editor.md#track-editor) (or double-click a waveform or cover) |
+| E, Return on Windows, Cmd+Down on macOS | Open the [track editor](editor.md#track-editor) (or double-click a track) |
 | Ctrl or Cmd + F | Search |
 | Ctrl or Cmd + Shift + F | The filter bar |
 | Ctrl or Cmd + I | Track info |
