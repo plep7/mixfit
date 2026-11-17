@@ -44,7 +44,7 @@ When you press Apply, Mixfit writes all this into your files.
   That track gets analysed once more the first time you add it after updating.
   Older rows in a `--csv` file get analysed once more too.
 - Older versions of the window didn't keep where the tempo drifts.
-  A track remembered from back then shows a general `bpm?` tooltip until it's analysed again.
+  A track remembered from back then shows a general `bpm?` note until it's analysed again.
 
 ## Checks
 
@@ -64,31 +64,31 @@ The Check column flags tracks worth a listen:
 
 A track whose analysis was [sharpened by its stems](#sharpened-by-stems) also shows a quiet `stems`.
 
-Hover a check to see the details for that track.
-The tooltip shows where the tempo drifts (`Tempo drifts 122-126 BPM at 1:12-1:40 and 4:05-4:30`), the second key reading, the tempo before folding, or the text that was removed.
-In the Check column, the arrow keys show the same tooltip.
-Screen readers read the tooltip from the cell.
-The `?` beside the Check heading lists every check.
+Point at a check and the [hint bar](window.md#the-hint-bar) gives the details for that track.
+It says where the tempo drifts (`Tempo drifts 122-126 BPM at 1:12-1:40 and 4:05-4:30`), the second key reading, the tempo before folding, or the text that was removed.
+Arrow to a Check cell and the bar says its first check and names the rest.
+Screen readers read every check of the cell.
+Click the `?` beside the Check heading to list every check.
 
 - **`bpm?`** means the tempo confidence is low, or the grid strays from the BPM by over 1.2% for 8 seconds or more.
   You won't see `bpm?` when the kicks and bass hold an even grid through the whole track.
   That's because a beat tracker can wander through a breakdown even when the tempo never moved.
 - **`bars?`** means the kick hits about as hard on the off-beat as on the beat, with no snare or clap on 2 and 4.
   It can also mean that nothing in the sound says which beat starts a bar.
-  The tooltip says which of the two it is.
+  The hint bar says which of the two it is.
   Before it shows, a second opinion gets a say from [Beat This!](https://github.com/CPJKU/beat_this), a learned beat and downbeat tracker, which listens to the 15 seconds where the kick and bass are loudest.
   Where it agrees with Mixfit's own reading on the beat and on bar 1, and the kick and bass hold the grid through the track, the check clears.
-  Where the two disagree, the check stays and the tooltip says what each of them hears.
+  Where the two disagree, the check stays and the hint bar says what the second opinion hears.
   The second opinion never moves a grid on its own.
   It was checked on generated tracks whose bars are known, and against bar lines marked on the benchmark corpus from spectrograms, not yet by ear.
   Automix echoes out of and into a `bars?` track rather than risk a train-wreck.
   Set the track's grid in the [track editor](editor.md#track-editor) and the check clears.
 - **`grid?`** means the grid your rekordbox collection, or an import, gave the track sits apart from the one Mixfit hears: half a beat off, bar 1 on another beat, or more than 20 ms away.
   Cues and the rekordbox XML use the imported grid.
-  The tooltip says how far apart the two are.
+  The hint bar says how far apart the two are.
   Open the track in the [track editor](editor.md#track-editor) to listen and set the one you trust.
 
-With `--csv`, the `bpm_unsteady` column holds the `bpm?` tooltip text.
+With `--csv`, the `bpm_unsteady` column says where the tempo drifts.
 The `tempos` column holds the grid written to the rekordbox XML.
 
 ## Energy level
@@ -202,13 +202,13 @@ Turn on **Sharpen analysis with stems** in [Settings](settings.md#stems), and Mi
 
 - **Bar 1** from the drums alone. The beat grid stays where the full mix puts it.
 - **Key** from the bass and other sounds, with no drums or vocal in the way.
-  If that key differs from the full mix's, the track gets `key?`, and the tooltip shows both.
+  If that key differs from the full mix's, the track gets `key?`, and the hint bar shows both.
   A key the full mix already had doubts about keeps its `key?`.
 - **Vocal parts** from how loud the vocal is on its own, where the voice model also hears a voice in it.
 
 Sometimes a stem doesn't separate cleanly.
 Then Mixfit keeps the full mix's reading for that part.
-The track shows a quiet `stems` in the Check column either way, and its tooltip says what came from the stems and what didn't, and why.
+The track shows a quiet `stems` in the Check column either way, and the hint bar says what came from the stems and what didn't, and why.
 A track you [locked](editor.md#track-editor) in the editor keeps its grid, cues and phrases.
 
 **How far you can trust it.**

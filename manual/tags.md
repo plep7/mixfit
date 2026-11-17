@@ -50,11 +50,33 @@ A musical key such as `Cm` only counts when it's next to a tempo or energy level
 The row says `cleaned`, and the table shows the result before you press Apply.
 Undo brings the old text back.
 
+## What Apply asks first
+
+Before Apply writes anything, it shows what it is about to do.
+
+![Apply's question: a row for each change, the warnings to read first, and a button that says what it does](../images/apply-question.png)
+
+Each row is one thing, with how many files it covers: **Write tags**, **Rename files** and **Make rekordbox cues**.
+**Rename files** counts only the files whose name changes, so a track that already has its name, or that your rekordbox collection keeps, isn't in the number.
+What you should read before going on sits under *Before you apply*:
+
+- Renamed files showing as missing in rekordbox, Serato or Traktor.
+- Tracks in your rekordbox collection that keep their names.
+- A live set that would stop.
+- Covers still being looked up.
+- No rekordbox collection chosen.
+
+The steps for getting keys into rekordbox are folded under **Notes for rekordbox**, and [Keys in rekordbox](#keys-in-rekordbox) has them too.
+The button says what it does, like **Apply to 7 files**.
+Press Return to apply, or Cancel or Esc to go back.
+If a live set would stop, Return cancels instead, so a stray key never stops the music.
+Undo puts the old names and tags back ([Undo](#undo)).
+
 ## When Apply cannot write a file
 
 When Apply can't write a file, it carries on with the rest.
 The row shows the reason in red in the Check column, and the New file name column shows the fix.
-To read the full message, hover over the badge or select the row.
+To read the full message, point at the badge and read the [hint bar](window.md#the-hint-bar), or select the row.
 
 | Reason | Cause |
 | --- | --- |
