@@ -13,7 +13,7 @@ The sidebar holds your favourites and the [library](library.md), and it comes in
 
 The full sidebar lists your favourites, then **Library** (This batch, Incoming and the Collection), then **Playlists**, with Related Tracks and Hot Cue Bank Lists under them.
 The round **+** at its top holds everything that isn't a list: Add files, Add folder, Import playlists, the New playlist, matchlist, Automix and folder, and Write to rekordbox XML.
-**Settings** sits at the foot of the sidebar, and you can also open it from the Edit menu (the app menu on a Mac).
+**Settings** sits at the foot of the sidebar, with the button that shows and hides the [hint bar](#the-hint-bar) beside it, and you can also open it from the Edit menu (the app menu on a Mac).
 
 The rail is the sidebar folded down to one column of places, so the table gets the room.
 
@@ -23,7 +23,7 @@ The rail is the sidebar folded down to one column of places, so the table gets t
 - **Playlists** opens a menu of the batch, Incoming and your playlists, with a folder as a submenu.
 - **Related** and **Banks** open or close those pages of the panel.
 - **Add** opens the same menu as the full sidebar's **+**.
-- **Settings** sits at the foot.
+- **Hints** and **Settings** sit at the foot, Hints over Settings.
 
 The places you're in are filled: Collection or Playlists for the table, and Related or Banks while the panel shows them.
 Mixfit starts with the rail.
@@ -53,7 +53,9 @@ Each key shows as a chip in the color Mixed In Key uses for that key.
 
 While a drop is analysing, the card shows the track and a bar.
 Until the first track is in, the bar sweeps and the card counts the seconds so far, so a long first track doesn't look stuck.
-After that it shows the count and the time left.
+After that it shows the count, and once a few tracks are in, roughly how long is left at the pace this drop is going.
+When a drop will take more than a couple of minutes, the card also says that the finished tracks are ready to play, mix and tag while the rest goes on.
+If you quit, every finished track stays in your library, and dropping the same folder again analyses only the rest.
 The heading and the sidebar counts roll to their new number when you add tracks or change a filter, and they stay still when you ask for less motion.
 
 There's no system title bar.
@@ -70,6 +72,22 @@ The side panel fades in, and the track editor is there the moment you open it.
 Every click does its work at once, and the motion only shows it.
 Every page and panel you open has a way back in plain sight: the back arrow in the editor, the close button on the panel, and Esc.
 If your system asks for less motion (Reduce Motion on a Mac, Animation effects off on Windows), none of this moves and every change just appears, and the spinner on a track being analysed stays still and fades gently in and out instead of turning.
+
+## The hint bar
+
+The hint bar is a line along the very bottom of the window, under the player bar.
+It says in one sentence what the control under your pointer is for, or what has keyboard focus, and it changes the moment the pointer moves.
+Over a table cell or heading with help, such as Energy, Loudness or the Key heading, it says what that is.
+Over a check in the Check column, it says what that check means for that track.
+With nothing to say it stays empty and keeps its height, so nothing moves.
+
+Mixfit starts with it on.
+To hide it, choose View > Hint bar, or press the hint button beside Settings at the foot of the sidebar (over Settings on the rail).
+The same two bring it back, and the button shows whether it is on.
+Mixfit remembers which you left it.
+With the bar hidden, hints show nowhere, and they don't turn up as tooltips instead.
+A tooltip only names a button that has just an icon, and gives its key.
+Settings has a hint bar of its own along its foot, which shows and hides with the window's.
 
 ## The table
 
@@ -157,6 +175,7 @@ Because plain E opens the editor, use Shift+E to jump to a name that starts with
 ### What a row's marks mean
 
 A clock on the cover means the track is waiting for analysis, and a spinner means it's analysing.
+Waiting tracks don't wait their turn when you want them: a track you click is analysed next, then the rows on screen, then the rest in the order you dropped them.
 Before the checks, a row can show three marks:
 
 - A padlock means the track is locked.
@@ -165,8 +184,8 @@ Before the checks, a row can show three marks:
 
 Cues that the analysis only suggests show on the waveform instead.
 The marks always keep that order, so sorting by Check groups tracks by their marks.
-To read a row's marks, hover over them or arrow to the cell.
-The `?` beside the Check heading lists every mark.
+To read a row's marks, point at them or arrow to the cell, and the [hint bar](#the-hint-bar) says what they mean.
+Click the `?` beside the Check heading to list every mark.
 A missing file shows a `missing` check.
 
 ### The footer

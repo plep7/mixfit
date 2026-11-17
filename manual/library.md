@@ -41,6 +41,7 @@ It lists the jobs running behind the window: analysis, Apply, USB exports, dupli
 Each job has a bar, a count ("6 of 17 tracks") and a **Cancel** button.
 
 - A job that will likely run past 10 seconds tells you roughly how long is left.
+  An analysis waits until a few tracks are in, so the time comes from how fast your own drop is going.
 - The button's rim fills as the jobs go.
   A dot on it means a finished job has a failure or results for you.
 - Finished jobs stay in the list until you press **Clear finished**.
